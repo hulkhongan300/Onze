@@ -53,6 +53,28 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-      - run: gh release create "$GITHUB_REF_NAME" onze-*.tar.gz onze-*.zip --repo "$GITHUB_REPOSITORY" --title "Onze $GITHUB_REF_NAME" --generate-notes
+      - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="$GITHUB_REF_NAME"
+          base="https://github.com/$GITHUB_REPOSITORY/releases/download/$tag"
+          cat > notes.md <<EOF
+          ## Download
+
+          | System | File |
+          |---|---|
+          | Windows (64-bit) | [onze-$tag-windows-x86_64.zip]($base/onze-$tag-windows-x86_64.zip) |
+          | macOS (Apple Silicon: M1 and later) | [onze-$tag-macos-apple-silicon.tar.gz]($base/onze-$tag-macos-apple-silicon.tar.gz) |
+          | macOS (Intel) | [onze-$tag-macos-intel.tar.gz]($base/onze-$tag-macos-intel.tar.gz) |
+          | Linux (x86_64) | [onze-$tag-linux-x86_64.tar.gz]($base/onze-$tag-linux-x86_64.tar.gz) |
+
+          Or use it in the browser: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/
+
+          The builds are not code-signed. See the [README](https://github.com/$GITHUB_REPOSITORY#download) for the one-time step on first launch.
+          EOF
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "Onze $tag" --notes-file notes.md \
+            "onze-$tag-windows-x86_64.zip#Windows (64-bit)" \
+            "onze-$tag-macos-apple-silicon.tar.gz#macOS (Apple Silicon)" \
+            "onze-$tag-macos-intel.tar.gz#macOS (Intel)" \
+            "onze-$tag-linux-x86_64.tar.gz#Linux (x86_64)"
