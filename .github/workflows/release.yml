@@ -1,6 +1,6 @@
 name: Release
 
-# Push a tag like v0.1.0 to build desktop binaries and publish a GitHub release.
+# Push a tag like v0.1.0 to build desktop apps and publish a GitHub release.
 on:
   push:
     tags: ["v*"]
@@ -13,10 +13,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - { os: ubuntu-latest, target: x86_64-unknown-linux-gnu, name: linux-x86_64 }
-          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x86_64 }
-          - { os: macos-latest, target: aarch64-apple-darwin, name: macos-apple-silicon }
-          - { os: macos-latest, target: x86_64-apple-darwin, name: macos-intel }
+          - { os: ubuntu-latest, targets: x86_64-unknown-linux-gnu }
+          - { os: windows-latest, targets: x86_64-pc-windows-msvc }
+          - { os: macos-latest, targets: "aarch64-apple-darwin,x86_64-apple-darwin" }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -25,26 +24,56 @@ jobs:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
-      - run: cargo build --release --locked --target ${{ matrix.target }}
+          targets: ${{ matrix.targets }}
+      - name: Build
+        run: |
+          for t in ${MATRIX_TARGETS//,/ }; do
+            cargo build --release --locked --target "$t"
+          done
+        env:
+          MATRIX_TARGETS: ${{ matrix.targets }}
       - name: Package
         run: |
-          dir="onze-${GITHUB_REF_NAME}-${{ matrix.name }}"
-          mkdir "$dir"
-          cp README.md LICENSE-APACHE "$dir/"
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            cp "target/${{ matrix.target }}/release/onze.exe" "$dir/"
-            7z a "$dir.zip" "$dir" > /dev/null
-          else
-            cp "target/${{ matrix.target }}/release/onze" "$dir/"
-            tar -czf "$dir.tar.gz" "$dir"
-          fi
+          tag="$GITHUB_REF_NAME"
+          mkdir out
+          case "$RUNNER_OS" in
+            Windows)
+              cp target/x86_64-pc-windows-msvc/release/onze.exe "out/onze-$tag-windows-x86_64.exe" ;;
+            Linux)
+              cp target/x86_64-unknown-linux-gnu/release/onze "out/onze-$tag-linux-x86_64" ;;
+            macOS)
+              # One universal (Apple Silicon + Intel) app bundle, shipped in a .dmg.
+              app=dmg/Onze.app
+              mkdir -p "$app/Contents/MacOS"
+              lipo -create -output "$app/Contents/MacOS/onze" \
+                target/aarch64-apple-darwin/release/onze target/x86_64-apple-darwin/release/onze
+              cat > "$app/Contents/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleName</key><string>Onze</string>
+            <key>CFBundleDisplayName</key><string>Onze</string>
+            <key>CFBundleExecutable</key><string>onze</string>
+            <key>CFBundleIdentifier</key><string>io.github.${GITHUB_REPOSITORY_OWNER}.onze</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>CFBundleShortVersionString</key><string>${tag#v}</string>
+            <key>CFBundleVersion</key><string>${tag#v}</string>
+            <key>LSMinimumSystemVersion</key><string>11.0</string>
+            <key>NSHighResolutionCapable</key><true/>
+          </dict>
+          </plist>
+          EOF
+              # Ad-hoc signature: Apple Silicon refuses to run unsigned code.
+              codesign --force --deep --sign - "$app"
+              ln -s /Applications dmg/Applications
+              hdiutil create -volname Onze -srcfolder dmg -ov -format UDZO "out/onze-$tag-macos.dmg" ;;
+          esac
+          ls -la out
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.name }}
-          path: |
-            onze-*.tar.gz
-            onze-*.zip
+          name: ${{ runner.os }}
+          path: out/*
 
   release:
     needs: build
@@ -64,17 +93,17 @@ jobs:
 
           | System | File |
           |---|---|
-          | Windows (64-bit) | [onze-$tag-windows-x86_64.zip]($base/onze-$tag-windows-x86_64.zip) |
-          | macOS (Apple Silicon: M1 and later) | [onze-$tag-macos-apple-silicon.tar.gz]($base/onze-$tag-macos-apple-silicon.tar.gz) |
-          | macOS (Intel) | [onze-$tag-macos-intel.tar.gz]($base/onze-$tag-macos-intel.tar.gz) |
-          | Linux (x86_64) | [onze-$tag-linux-x86_64.tar.gz]($base/onze-$tag-linux-x86_64.tar.gz) |
+          | Windows (64-bit) | [onze-$tag-windows-x86_64.exe]($base/onze-$tag-windows-x86_64.exe) |
+          | macOS (Apple Silicon and Intel) | [onze-$tag-macos.dmg]($base/onze-$tag-macos.dmg) |
+          | Linux (x86_64) | [onze-$tag-linux-x86_64]($base/onze-$tag-linux-x86_64) |
+
+          - **Windows:** run the .exe. SmartScreen may warn because it isn't code-signed: *More info* → *Run anyway*.
+          - **macOS:** open the .dmg and drag Onze to Applications. First launch: right-click Onze → *Open*.
+          - **Linux:** make it executable once with \`chmod +x onze-$tag-linux-x86_64\`, then run it.
 
           Or use it in the browser: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/
-
-          The builds are not code-signed. See the [README](https://github.com/$GITHUB_REPOSITORY#download) for the one-time step on first launch.
           EOF
           gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "Onze $tag" --notes-file notes.md \
-            "onze-$tag-windows-x86_64.zip#Windows (64-bit)" \
-            "onze-$tag-macos-apple-silicon.tar.gz#macOS (Apple Silicon)" \
-            "onze-$tag-macos-intel.tar.gz#macOS (Intel)" \
-            "onze-$tag-linux-x86_64.tar.gz#Linux (x86_64)"
+            "onze-$tag-windows-x86_64.exe#Windows (64-bit) .exe" \
+            "onze-$tag-macos.dmg#macOS .dmg (Apple Silicon and Intel)" \
+            "onze-$tag-linux-x86_64#Linux (x86_64) executable"

@@ -16,12 +16,15 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 
 ## Download
 
-Desktop builds for Linux, Windows and macOS (Apple Silicon and Intel) are on the [Releases page](https://github.com/hulkhongan300/Onze/releases).
+Desktop apps are on the [Releases page](https://github.com/hulkhongan300/Onze/releases/latest):
 
-The builds are not code-signed, so the first launch needs one extra step:
+- **Windows:** `onze-<version>-windows-x86_64.exe`, just run it.
+- **macOS:** `onze-<version>-macos.dmg` (Apple Silicon and Intel). Open it and drag Onze to Applications.
+- **Linux:** `onze-<version>-linux-x86_64`. Run `chmod +x` on it once, then start it.
+
+The apps are not code-signed, so the first launch needs one extra step:
 - **Windows:** SmartScreen may warn; click *More info* → *Run anyway*.
-- **macOS:** right-click `onze` → *Open*, or run `xattr -d com.apple.quarantine onze`.
-- **Linux:** `chmod +x onze` if needed, then `./onze`.
+- **macOS:** right-click Onze → *Open* (or `xattr -dr com.apple.quarantine /Applications/Onze.app`).
 
 To publish a new release, bump the version in `Cargo.toml` and push a tag: `git tag v0.2.0 && git push origin v0.2.0`.
 
