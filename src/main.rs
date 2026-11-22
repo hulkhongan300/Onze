@@ -26,13 +26,20 @@ fn main() {
             .and_then(|d| d.get_element_by_id("onze"))
             .and_then(|e| e.dyn_into::<eframe::web_sys::HtmlCanvasElement>().ok())
             .expect("index.html needs <canvas id=\"onze\">");
-        eframe::WebRunner::new()
+        let started = eframe::WebRunner::new()
             .start(
-                canvas,
+                canvas.clone(),
                 eframe::WebOptions::default(),
                 Box::new(|_cc| Ok(Box::new(app::Onze::default()))),
             )
-            .await
-            .expect("failed to start Onze");
+            .await;
+        // Show the failure on the page instead of leaving a blank canvas.
+        if let Err(e) = started
+            && let Some(parent) = canvas.parent_element()
+        {
+            parent.set_text_content(Some(&format!(
+                "Onze couldn't start in this browser (WebGL2 is required): {e:?}"
+            )));
+        }
     });
 }
