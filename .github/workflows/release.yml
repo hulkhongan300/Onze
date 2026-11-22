@@ -1,0 +1,56 @@
+name: Release
+
+# Push a tag like v0.1.0 to build desktop binaries and publish a GitHub release.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { os: ubuntu-latest, target: x86_64-unknown-linux-gnu, name: linux-x86_64 }
+          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x86_64 }
+          - { os: macos-latest, target: aarch64-apple-darwin, name: macos-apple-silicon }
+          - { os: macos-latest, target: x86_64-apple-darwin, name: macos-intel }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: cargo build --release --locked --target ${{ matrix.target }}
+      - name: Package
+        run: |
+          dir="onze-${GITHUB_REF_NAME}-${{ matrix.name }}"
+          mkdir "$dir"
+          cp README.md LICENSE-APACHE "$dir/"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            cp "target/${{ matrix.target }}/release/onze.exe" "$dir/"
+            7z a "$dir.zip" "$dir" > /dev/null
+          else
+            cp "target/${{ matrix.target }}/release/onze" "$dir/"
+            tar -czf "$dir.tar.gz" "$dir"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: onze-*.*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+      - run: gh release create "$GITHUB_REF_NAME" onze-* --repo "$GITHUB_REPOSITORY" --title "Onze $GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

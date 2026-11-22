@@ -14,7 +14,18 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 - Undo (Ctrl/Cmd+Z), clear drawings, reset players
 - Save positions: moved players become their new spots (no dashed lines) for this session; a refresh or restart goes back to defaults
 
-## Run
+## Download
+
+Desktop builds for Linux, Windows and macOS (Apple Silicon and Intel) are on the [Releases page](https://github.com/hulkhongan300/Onze/releases).
+
+The builds are not code-signed, so the first launch needs one extra step:
+- **Windows:** SmartScreen may warn; click *More info* → *Run anyway*.
+- **macOS:** right-click `onze` → *Open*, or run `xattr -d com.apple.quarantine onze`.
+- **Linux:** `chmod +x onze` if needed, then `./onze`.
+
+To publish a new release, bump the version in `Cargo.toml` and push a tag: `git tag v0.2.0 && git push origin v0.2.0`.
+
+## Run from source
 
 Native:
 
