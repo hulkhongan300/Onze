@@ -35,12 +35,12 @@ jobs:
       - name: Package
         run: |
           tag="$GITHUB_REF_NAME"
-          mkdir out
+          mkdir out  # file names carry no version, so README links to releases/latest/download keep working
           case "$RUNNER_OS" in
             Windows)
-              cp target/x86_64-pc-windows-msvc/release/onze.exe "out/onze-$tag-windows-x86_64.exe" ;;
+              cp target/x86_64-pc-windows-msvc/release/onze.exe "out/onze-windows-x86_64.exe" ;;
             Linux)
-              cp target/x86_64-unknown-linux-gnu/release/onze "out/onze-$tag-linux-x86_64" ;;
+              cp target/x86_64-unknown-linux-gnu/release/onze "out/onze-linux-x86_64" ;;
             macOS)
               # One universal (Apple Silicon + Intel) app bundle, shipped in a .dmg.
               app=dmg/Onze.app
@@ -67,7 +67,7 @@ jobs:
               # Ad-hoc signature: Apple Silicon refuses to run unsigned code.
               codesign --force --deep --sign - "$app"
               ln -s /Applications dmg/Applications
-              hdiutil create -volname Onze -srcfolder dmg -ov -format UDZO "out/onze-$tag-macos.dmg" ;;
+              hdiutil create -volname Onze -srcfolder dmg -ov -format UDZO "out/onze-macos.dmg" ;;
           esac
           ls -la out
       - uses: actions/upload-artifact@v4
@@ -93,17 +93,17 @@ jobs:
 
           | System | File |
           |---|---|
-          | Windows (64-bit) | [onze-$tag-windows-x86_64.exe]($base/onze-$tag-windows-x86_64.exe) |
-          | macOS (Apple Silicon and Intel) | [onze-$tag-macos.dmg]($base/onze-$tag-macos.dmg) |
-          | Linux (x86_64) | [onze-$tag-linux-x86_64]($base/onze-$tag-linux-x86_64) |
+          | Windows (64-bit) | [onze-windows-x86_64.exe]($base/onze-windows-x86_64.exe) |
+          | macOS (Apple Silicon and Intel) | [onze-macos.dmg]($base/onze-macos.dmg) |
+          | Linux (x86_64) | [onze-linux-x86_64]($base/onze-linux-x86_64) |
 
           - **Windows:** run the .exe. SmartScreen may warn because it isn't code-signed: *More info* → *Run anyway*.
           - **macOS:** open the .dmg and drag Onze to Applications. First launch: right-click Onze → *Open*.
-          - **Linux:** make it executable once with \`chmod +x onze-$tag-linux-x86_64\`, then run it.
+          - **Linux:** make it executable once with \`chmod +x onze-linux-x86_64\`, then run it.
 
           Or use it in the browser: https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/
           EOF
           gh release create "$tag" --repo "$GITHUB_REPOSITORY" --title "Onze $tag" --notes-file notes.md \
-            "onze-$tag-windows-x86_64.exe#Windows (64-bit) .exe" \
-            "onze-$tag-macos.dmg#macOS .dmg (Apple Silicon and Intel)" \
-            "onze-$tag-linux-x86_64#Linux (x86_64) executable"
+            "onze-windows-x86_64.exe#Windows (64-bit) .exe" \
+            "onze-macos.dmg#macOS .dmg (Apple Silicon and Intel)" \
+            "onze-linux-x86_64#Linux (x86_64) executable"

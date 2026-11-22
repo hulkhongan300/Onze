@@ -16,11 +16,17 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 
 ## Download
 
-Desktop apps are on the [Releases page](https://github.com/hulkhongan300/Onze/releases/latest):
+| System | Download |
+|---|---|
+| Windows (64-bit) | [**Download Onze for Windows** (.exe)](https://github.com/hulkhongan300/Onze/releases/latest/download/onze-windows-x86_64.exe) |
+| macOS (Apple Silicon and Intel) | [**Download Onze for macOS** (.dmg)](https://github.com/hulkhongan300/Onze/releases/latest/download/onze-macos.dmg) |
+| Linux (x86_64) | [**Download Onze for Linux**](https://github.com/hulkhongan300/Onze/releases/latest/download/onze-linux-x86_64) |
 
-- **Windows:** `onze-<version>-windows-x86_64.exe`, just run it.
-- **macOS:** `onze-<version>-macos.dmg` (Apple Silicon and Intel). Open it and drag Onze to Applications.
-- **Linux:** `onze-<version>-linux-x86_64`. Run `chmod +x` on it once, then start it.
+- **Windows:** run the `.exe`.
+- **macOS:** open the `.dmg` and drag Onze to Applications.
+- **Linux:** make the file executable once (`chmod +x onze-linux-x86_64`), then run it.
+
+All versions are on the [Releases page](https://github.com/hulkhongan300/Onze/releases).
 
 The apps are not code-signed, so the first launch needs one extra step:
 - **Windows:** SmartScreen may warn; click *More info* → *Run anyway*.
