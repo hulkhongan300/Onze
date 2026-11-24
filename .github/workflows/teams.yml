@@ -1,0 +1,39 @@
+name: teams
+
+# Refreshes data/teams.json from API-Football and redeploys the web version if it changed.
+on:
+  schedule:
+    - cron: "0 6 * * 2" # Tuesdays, after the weekend's matches
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write # to start the Pages deploy
+
+concurrency:
+  group: teams
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Without the secret the script prints a notice and leaves the file as is.
+      - run: python3 scripts/fetch_teams.py
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          API_FOOTBALL_SEASON: ${{ vars.API_FOOTBALL_SEASON }}
+      - name: Commit and redeploy if changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/teams.json; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update teams.json" -- data/teams.json
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start Pages directly.
+          gh workflow run pages.yml --ref "$GITHUB_REF_NAME"

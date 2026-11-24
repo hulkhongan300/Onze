@@ -1,9 +1,11 @@
 use crate::formations::{COLS, FORMATIONS, ROWS};
+use crate::teams::{self, DATA};
 use eframe::egui::{
     self, Align2, Color32, CursorIcon, FontId, Key, KeyboardShortcut, Modifiers, PointerButton,
     Popup, Pos2, Rect, Sense, SetOpenCommand, Shape, Stroke, StrokeKind, Vec2,
     emath::RectTransform, pos2, vec2,
 };
+use serde::{Deserialize, Serialize};
 
 /// Real pitch size in metres, used for the markings.
 const W: f32 = 68.0;
@@ -48,7 +50,7 @@ fn clamp_delta(mut d: Vec2, start: &[Pos2; 11], who: &[usize], inset: f32) -> Ve
     d
 }
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, Serialize, Deserialize)]
 enum Surface {
     White,
     Grass,
@@ -70,6 +72,37 @@ impl Surface {
         match self {
             Surface::White => Color32::from_gray(80),
             Surface::Grass => Color32::WHITE,
+        }
+    }
+}
+
+/// What each player token shows.
+#[derive(Clone, Copy, PartialEq, Serialize, Deserialize)]
+enum Labels {
+    Number,
+    Name,
+    Both,
+    None,
+}
+
+/// Shirt number and name, kept per player index so they survive formation changes.
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
+struct Player {
+    number: u8,
+    name: String,
+}
+
+impl Labels {
+    /// Text inside the circle and text below it. Name mode falls back to the number.
+    fn texts(self, p: &Player) -> (Option<String>, Option<&str>) {
+        let name = Some(p.name.trim()).filter(|n| !n.is_empty());
+        let number = Some(p.number.to_string());
+        match self {
+            Labels::Number => (number, None),
+            Labels::Name if name.is_some() => (None, name),
+            Labels::Name => (number, None),
+            Labels::Both => (number, name),
+            Labels::None => (None, None),
         }
     }
 }
@@ -115,13 +148,40 @@ pub struct Onze {
     width: f32,
     surface: Surface,
     full_field: bool,
-    show_numbers: bool,
+    // Not on Board: typing names is not an undo step.
+    team: [Player; 11],
+    labels: Labels,
     show_grid: bool,
     show_panel: bool,
     selected: [bool; 11],
     grab: Option<Grab>,
     /// Screen point where the selection box drag started.
     lasso: Option<Pos2>,
+    /// Import picker: indexes into `DATA`, and what the last import did.
+    league: usize,
+    pick: usize,
+    import_note: String,
+}
+
+/// What survives a refresh or restart. Drawings and undo history are left out.
+/// `serde(default)` lets data saved by an older version fill in only the fields it has.
+#[derive(PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+struct Saved {
+    team: [Player; 11],
+    labels: Labels,
+    formation: usize,
+    players: [Pos2; 11],
+    home: [Pos2; 11],
+    surface: Surface,
+    full_field: bool,
+    color: Color32,
+}
+
+impl Default for Saved {
+    fn default() -> Self {
+        Onze::default().saved()
+    }
 }
 
 /// Players being dragged, with where they and the pointer started (grid units).
@@ -148,12 +208,64 @@ impl Default for Onze {
             width: 3.0,
             surface: Surface::White,
             full_field: false,
-            show_numbers: true,
+            team: std::array::from_fn(|i| Player {
+                number: i as u8 + 1,
+                name: String::new(),
+            }),
+            labels: Labels::Number,
             show_grid: false,
             show_panel: true,
             selected: [false; 11],
             grab: None,
             lasso: None,
+            league: 0,
+            pick: 0,
+            import_note: String::new(),
+        }
+    }
+}
+
+impl Onze {
+    /// Restores the last session's state, or the defaults if there is none or it doesn't decode.
+    pub fn new(cc: &eframe::CreationContext) -> Self {
+        cc.storage
+            .and_then(|s| eframe::get_value(s, eframe::APP_KEY))
+            .map_or_else(Self::default, Self::from_saved)
+    }
+
+    fn from_saved(s: Saved) -> Self {
+        let mut app = Self::default();
+        // A stale index (formation list changed) or off-grid spots keep the default board.
+        let on_grid =
+            |p: &Pos2| (0.0..=COLS as f32).contains(&p.x) && (0.0..=ROWS as f32).contains(&p.y);
+        if s.formation < FORMATIONS.len() {
+            app.board.set_formation(s.formation);
+            if s.players.iter().chain(&s.home).all(on_grid) {
+                app.board.players = s.players;
+                app.board.home = s.home;
+            }
+        }
+        app.team = s.team.map(|p| Player {
+            number: p.number.min(99),
+            ..p
+        });
+        app.labels = s.labels;
+        app.surface = s.surface;
+        app.full_field = s.full_field;
+        app.color = s.color;
+        app
+    }
+
+    fn saved(&self) -> Saved {
+        Saved {
+            team: self.team.clone(),
+            labels: self.labels,
+            formation: self.board.formation,
+            players: self.board.players,
+            home: self.board.home,
+            surface: self.surface,
+            full_field: self.full_field,
+            color: self.color,
         }
     }
 }
@@ -197,6 +309,76 @@ impl Onze {
         }
     }
 
+    /// Puts a real team's starting XI on the board. The formation change is an undo step;
+    /// names and numbers are not, as with typing them.
+    fn import(&mut self, t: &teams::Team) {
+        let (known, order) = teams::assign(t, self.board.formation);
+        if let Some(f) = known
+            && f != self.board.formation
+        {
+            self.edit(|b| b.set_formation(f));
+        }
+        self.team = order.map(|j| Player {
+            number: t.xi[j].number.min(99),
+            name: t.xi[j].name.clone(),
+        });
+        self.import_note = match known {
+            Some(_) => format!("Imported {} ({})", t.name, t.formation),
+            None => format!(
+                "Imported {}; their {} isn't in the list, kept {}",
+                t.name, t.formation, FORMATIONS[self.board.formation].name
+            ),
+        };
+    }
+
+    fn import_controls(&mut self, ui: &mut egui::Ui) {
+        ui.label("Import team");
+        if DATA.leagues.is_empty() {
+            ui.weak(
+                "No teams yet. They are fetched by the\n\"teams\" GitHub workflow (see README).",
+            );
+            return;
+        }
+        // Stale indexes can't happen with compiled-in data, but stay safe.
+        self.league = self.league.min(DATA.leagues.len() - 1);
+        let league = &DATA.leagues[self.league];
+        let before = self.league;
+        egui::ComboBox::from_label("League")
+            .selected_text(&league.name)
+            .show_ui(ui, |ui| {
+                for (i, l) in DATA.leagues.iter().enumerate() {
+                    ui.selectable_value(&mut self.league, i, &l.name);
+                }
+            });
+        if self.league != before {
+            self.pick = 0;
+        }
+        let league = &DATA.leagues[self.league];
+        self.pick = self.pick.min(league.teams.len() - 1);
+        egui::ComboBox::from_label("Team")
+            .selected_text(&league.teams[self.pick].name)
+            .height(400.0)
+            .show_ui(ui, |ui| {
+                for (i, t) in league.teams.iter().enumerate() {
+                    ui.selectable_value(&mut self.pick, i, format!("{} · {}", t.name, t.formation));
+                }
+            });
+        let season = DATA
+            .season
+            .map(|y| format!(" ({y}/{:02})", (y + 1) % 100))
+            .unwrap_or_default();
+        if ui
+            .button("Import")
+            .on_hover_text(format!("Most recent starting XI{season}"))
+            .clicked()
+        {
+            self.import(&league.teams[self.pick]);
+        }
+        if !self.import_note.is_empty() {
+            ui.weak(&self.import_note);
+        }
+    }
+
     /// Closest player whose token contains the screen point `p`.
     fn player_at(&self, p: Pos2, to_screen: &RectTransform, r: f32) -> Option<usize> {
         let d = |i: usize| (*to_screen * self.board.players[i]).distance(p);
@@ -234,7 +416,7 @@ impl Onze {
                 self.board.players != self.board.home,
                 egui::Button::new("Save positions"),
             )
-            .on_hover_text("Make these the players' new spots (until refresh)")
+            .on_hover_text("Make these the players' new spots")
             .on_disabled_hover_text("No unsaved moves")
             .clicked()
         {
@@ -248,10 +430,10 @@ impl Onze {
 
         let mut f = self.board.formation;
         egui::ComboBox::from_label("Formation")
-            .selected_text(FORMATIONS[f].name)
+            .selected_text(FORMATIONS[f].label())
             .show_ui(ui, |ui| {
                 for (i, form) in FORMATIONS.iter().enumerate() {
-                    ui.selectable_value(&mut f, i, form.name);
+                    ui.selectable_value(&mut f, i, form.label());
                 }
             });
         if f != self.board.formation {
@@ -265,8 +447,30 @@ impl Onze {
             ui.selectable_value(&mut self.surface, Surface::Grass, "Grass");
         });
         ui.checkbox(&mut self.full_field, "Full field");
-        ui.checkbox(&mut self.show_numbers, "Show numbers");
         ui.checkbox(&mut self.show_grid, "Show grid");
+        ui.horizontal(|ui| {
+            ui.label("Labels");
+            ui.selectable_value(&mut self.labels, Labels::Number, "Number");
+            ui.selectable_value(&mut self.labels, Labels::Name, "Name");
+            ui.selectable_value(&mut self.labels, Labels::Both, "Both");
+            ui.selectable_value(&mut self.labels, Labels::None, "None");
+        });
+
+        ui.separator();
+        self.import_controls(ui);
+
+        ui.separator();
+        ui.label("Team");
+        for p in &mut self.team {
+            ui.horizontal(|ui| {
+                ui.add(egui::DragValue::new(&mut p.number).range(0..=99));
+                ui.add(
+                    egui::TextEdit::singleline(&mut p.name)
+                        .hint_text("Name")
+                        .desired_width(120.0),
+                );
+            });
+        }
 
         ui.separator();
         ui.label("Tool");
@@ -496,13 +700,23 @@ impl Onze {
             if self.tool == Tool::Move && self.selected[i] {
                 painter.circle_stroke(c, r + 3.0, Stroke::new(2.5, SELECTION));
             }
-            if self.show_numbers {
+            let (inside, below) = self.labels.texts(&self.team[i]);
+            if let Some(t) = inside {
                 painter.text(
                     c,
                     Align2::CENTER_CENTER,
-                    i + 1,
+                    t,
                     FontId::proportional(r),
                     Color32::WHITE,
+                );
+            }
+            if let Some(t) = below {
+                painter.text(
+                    c + vec2(0.0, r + 2.0),
+                    Align2::CENTER_TOP,
+                    t,
+                    FontId::proportional(0.8 * r),
+                    ink,
                 );
             }
         }
@@ -521,9 +735,17 @@ impl Onze {
 }
 
 impl eframe::App for Onze {
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        eframe::set_value(storage, eframe::APP_KEY, &self.saved());
+    }
+
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         let ctx = ui.ctx().clone();
-        if ctx.input_mut(|i| i.consume_shortcut(&KeyboardShortcut::new(Modifiers::COMMAND, Key::Z)))
+        // While typing a name, Ctrl+Z belongs to the text field.
+        if !ctx.egui_wants_keyboard_input()
+            && ctx.input_mut(|i| {
+                i.consume_shortcut(&KeyboardShortcut::new(Modifiers::COMMAND, Key::Z))
+            })
         {
             self.undo();
         }
@@ -533,7 +755,9 @@ impl eframe::App for Onze {
             self.show_panel = !self.show_panel;
         }
         if self.show_panel {
-            egui::Panel::left("tools").show(ui, |ui| self.panel(ui));
+            egui::Panel::left("tools").show(ui, |ui| {
+                egui::ScrollArea::vertical().show(ui, |ui| self.panel(ui))
+            });
         }
         egui::CentralPanel::default().show(ui, |ui| self.pitch(ui));
     }
@@ -578,6 +802,124 @@ mod tests {
         assert_eq!(app.board.players, app.board.home);
         app.undo();
         assert_ne!(app.board.players, app.board.home);
+    }
+
+    #[test]
+    fn labels_fall_back_to_number_without_a_name() {
+        let mut p = Player {
+            number: 9,
+            name: " ".into(),
+        };
+        assert_eq!(Labels::Name.texts(&p), (Some("9".into()), None));
+        assert_eq!(Labels::Both.texts(&p), (Some("9".into()), None));
+        p.name = "Eusébio".into();
+        assert_eq!(Labels::Name.texts(&p), (None, Some("Eusébio")));
+        assert_eq!(Labels::Both.texts(&p), (Some("9".into()), Some("Eusébio")));
+        assert_eq!(Labels::None.texts(&p), (None, None));
+    }
+
+    #[test]
+    fn team_survives_formation_change() {
+        let mut app = Onze::default();
+        app.team[3].name = "Ruben".into();
+        app.edit(|b| b.set_formation(2));
+        app.edit(|b| b.set_formation(b.formation));
+        assert_eq!(app.team[3].name, "Ruben");
+        assert_eq!(app.team[10].number, 11);
+    }
+
+    #[derive(Default)]
+    struct Mem(std::collections::HashMap<String, String>);
+
+    impl eframe::Storage for Mem {
+        fn get_string(&self, key: &str) -> Option<String> {
+            self.0.get(key).cloned()
+        }
+        fn set_string(&mut self, key: &str, value: String) {
+            self.0.insert(key.into(), value);
+        }
+        fn remove_string(&mut self, key: &str) {
+            self.0.remove(key);
+        }
+        fn flush(&mut self) {}
+    }
+
+    fn load(mem: &Mem) -> Option<Saved> {
+        eframe::get_value(mem, eframe::APP_KEY)
+    }
+
+    #[test]
+    fn state_round_trips_through_storage() {
+        let mut app = Onze::default();
+        app.team[3].name = "Ruben".into();
+        app.team[9].number = 77;
+        app.labels = Labels::Both;
+        app.surface = Surface::Grass;
+        app.full_field = true;
+        app.color = PEN_COLORS[2].1;
+        app.edit(|b| b.set_formation(2));
+        app.edit(|b| b.players[5] = cell_center((0, 0)));
+        app.edit(|b| b.home = b.players);
+        let mut mem = Mem::default();
+        eframe::App::save(&mut app, &mut mem);
+        let back = Onze::from_saved(load(&mem).unwrap());
+        assert!(back.saved() == app.saved());
+    }
+
+    #[test]
+    fn bad_stored_state_falls_back_to_defaults() {
+        let mut s = Saved::default();
+        s.team[3].name = "Ruben".into();
+        s.formation = 999;
+        let app = Onze::from_saved(s);
+        assert_eq!(app.board.formation, 0);
+        assert!(app.board.players == Onze::default().board.players);
+        assert_eq!(app.team[3].name, "Ruben");
+
+        let mut s = Saved::default();
+        s.players[0] = pos2(f32::NAN, 500.0);
+        assert!(Onze::from_saved(s).board.players == Onze::default().board.players);
+
+        let mut mem = Mem::default();
+        mem.0.insert(eframe::APP_KEY.into(), "not ron".into());
+        assert!(load(&mem).is_none());
+        // Older data with fewer fields keeps what it has and defaults the rest.
+        mem.0
+            .insert(eframe::APP_KEY.into(), "(labels: Name)".into());
+        let s = load(&mem).unwrap();
+        assert!(s.labels == Labels::Name);
+        assert_eq!(s.team[0].number, 1);
+    }
+
+    #[test]
+    fn import_sets_formation_and_names_as_one_undo_step() {
+        // API-Football order: right to left within each line.
+        let grids = [
+            "1:1", "2:4", "2:3", "2:2", "2:1", "3:4", "3:3", "3:2", "3:1", "4:2", "4:1",
+        ];
+        let t = teams::Team {
+            name: "T".into(),
+            formation: "4-4-2".into(),
+            xi: grids
+                .iter()
+                .map(|g| teams::Pick {
+                    name: (*g).into(),
+                    number: 200,
+                    grid: (*g).into(),
+                })
+                .collect(),
+        };
+        let mut app = Onze::default();
+        app.import(&t);
+        assert_eq!(FORMATIONS[app.board.formation].name, "4-4-2");
+        assert_eq!(app.history.len(), 1);
+        let names: Vec<&str> = app.team.iter().map(|p| p.name.as_str()).collect();
+        // Slot 1 is our left-back, slot 9 our left striker.
+        assert_eq!(names[..2], ["1:1", "2:1"]);
+        assert_eq!(names[9..], ["4:1", "4:2"]);
+        assert_eq!(app.team[0].number, 99);
+        app.undo();
+        assert_eq!(app.board.formation, 0);
     }
 
     #[test]
