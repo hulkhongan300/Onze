@@ -4,7 +4,7 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 
 **Try it in the browser: https://hulkhongan300.github.io/Onze/**
 
-- Pick one of 10 common formations (4-3-3, 4-2-3-1, 4-4-2, 3-5-2, 4-1-4-1, 4-4-1-1, 3-4-3, 5-3-2, 4-1-2-1-2, 3-4-2-1)
+- Pick one of 19 formations (4-3-3, 4-2-3-1, 4-4-2, 3-5-2, 4-1-4-1, 4-4-1-1, 3-4-3, 5-3-2, 4-1-2-1-2, 3-4-2-1, 4-5-1, 5-4-1, 4-3-2-1, 4-2-2-2, 4-3-1-2, 3-4-1-2, 4-2-4, and the historic 2-3-5 and 3-2-2-3)
 - Half field (default) or full field; white or grass pitch
 - Drag players; they snap to a 9×13 grid, with a dashed line back to their formation spot
 - Move tool: box-select or click players, then drag them as a group
