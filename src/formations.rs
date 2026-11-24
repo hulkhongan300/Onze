@@ -6,6 +6,8 @@ pub const ROWS: u8 = 13;
 
 pub struct Formation {
     pub name: &'static str,
+    /// Established nickname, e.g. "Christmas Tree".
+    pub nick: Option<&'static str>,
     /// (col, row) per player, goalkeeper first.
     pub slots: [(u8, u8); 11],
 }
@@ -30,10 +32,29 @@ const fn f(name: &'static str, d: &[(u8, u8)], rest: &[(u8, u8)]) -> Formation {
         d.len() + rest.len() == 10,
         "a formation needs 10 outfield players"
     );
-    Formation { name, slots }
+    Formation {
+        name,
+        nick: None,
+        slots,
+    }
 }
 
-pub const FORMATIONS: [Formation; 19] = [
+impl Formation {
+    const fn aka(mut self, nick: &'static str) -> Self {
+        self.nick = Some(nick);
+        self
+    }
+
+    /// Dropdown text: `4-3-2-1 · Christmas Tree`, or just the digits.
+    pub fn label(&self) -> String {
+        match self.nick {
+            Some(n) => format!("{} · {n}", self.name),
+            None => self.name.to_owned(),
+        }
+    }
+}
+
+pub const FORMATIONS: [Formation; 20] = [
     f(
         "4-3-3",
         &BACK4,
@@ -78,7 +99,8 @@ pub const FORMATIONS: [Formation; 19] = [
         "4-1-2-1-2",
         &BACK4,
         &[(4, 8), (2, 7), (6, 7), (4, 5), (3, 3), (5, 3)],
-    ),
+    )
+    .aka("Diamond"),
     f(
         "3-4-2-1",
         &BACK3,
@@ -98,12 +120,14 @@ pub const FORMATIONS: [Formation; 19] = [
         "4-3-2-1",
         &BACK4,
         &[(2, 8), (4, 8), (6, 8), (3, 5), (5, 5), (4, 3)],
-    ),
+    )
+    .aka("Christmas Tree"),
     f(
         "4-2-2-2",
         &BACK4,
         &[(3, 8), (5, 8), (1, 5), (7, 5), (3, 3), (5, 3)],
-    ),
+    )
+    .aka("Box"),
     f(
         "4-3-1-2",
         &BACK4,
@@ -132,12 +156,21 @@ pub const FORMATIONS: [Formation; 19] = [
             (6, 3),
             (8, 3),
         ],
-    ),
+    )
+    .aka("Pyramid"),
     f(
         "3-2-2-3",
         &BACK3,
         &[(3, 8), (5, 8), (2, 6), (6, 6), (1, 3), (4, 3), (7, 3)],
-    ),
+    )
+    .aka("WM"),
+    // Libero sweeps behind a man-marking back four.
+    f(
+        "1-4-3-2",
+        &[(4, 11), (1, 10), (3, 10), (5, 10), (7, 10)],
+        &[(2, 7), (4, 7), (6, 7), (3, 4), (5, 4)],
+    )
+    .aka("Catenaccio"),
 ];
 
 #[cfg(test)]
@@ -156,5 +189,16 @@ mod tests {
                 );
             }
         }
+    }
+
+    #[test]
+    fn labels_are_unique() {
+        for (i, a) in FORMATIONS.iter().enumerate() {
+            for b in &FORMATIONS[i + 1..] {
+                assert_ne!(a.name, b.name);
+                assert!(a.nick.is_none() || a.nick != b.nick, "{}", a.label());
+            }
+        }
+        assert_eq!(FORMATIONS[12].label(), "4-3-2-1 · Christmas Tree");
     }
 }
