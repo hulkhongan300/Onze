@@ -1,4 +1,5 @@
 use crate::formations::{COLS, FORMATIONS, ROWS};
+use crate::teams::{self, DATA};
 use eframe::egui::{
     self, Align2, Color32, CursorIcon, FontId, Key, KeyboardShortcut, Modifiers, PointerButton,
     Popup, Pos2, Rect, Sense, SetOpenCommand, Shape, Stroke, StrokeKind, Vec2,
@@ -156,6 +157,10 @@ pub struct Onze {
     grab: Option<Grab>,
     /// Screen point where the selection box drag started.
     lasso: Option<Pos2>,
+    /// Import picker: indexes into `DATA`, and what the last import did.
+    league: usize,
+    pick: usize,
+    import_note: String,
 }
 
 /// What survives a refresh or restart. Drawings and undo history are left out.
@@ -213,6 +218,9 @@ impl Default for Onze {
             selected: [false; 11],
             grab: None,
             lasso: None,
+            league: 0,
+            pick: 0,
+            import_note: String::new(),
         }
     }
 }
@@ -301,6 +309,76 @@ impl Onze {
         }
     }
 
+    /// Puts a real team's starting XI on the board. The formation change is an undo step;
+    /// names and numbers are not, as with typing them.
+    fn import(&mut self, t: &teams::Team) {
+        let (known, order) = teams::assign(t, self.board.formation);
+        if let Some(f) = known
+            && f != self.board.formation
+        {
+            self.edit(|b| b.set_formation(f));
+        }
+        self.team = order.map(|j| Player {
+            number: t.xi[j].number.min(99),
+            name: t.xi[j].name.clone(),
+        });
+        self.import_note = match known {
+            Some(_) => format!("Imported {} ({})", t.name, t.formation),
+            None => format!(
+                "Imported {}; their {} isn't in the list, kept {}",
+                t.name, t.formation, FORMATIONS[self.board.formation].name
+            ),
+        };
+    }
+
+    fn import_controls(&mut self, ui: &mut egui::Ui) {
+        ui.label("Import team");
+        if DATA.leagues.is_empty() {
+            ui.weak(
+                "No teams yet. They are fetched by the\n\"teams\" GitHub workflow (see README).",
+            );
+            return;
+        }
+        // Stale indexes can't happen with compiled-in data, but stay safe.
+        self.league = self.league.min(DATA.leagues.len() - 1);
+        let league = &DATA.leagues[self.league];
+        let before = self.league;
+        egui::ComboBox::from_label("League")
+            .selected_text(&league.name)
+            .show_ui(ui, |ui| {
+                for (i, l) in DATA.leagues.iter().enumerate() {
+                    ui.selectable_value(&mut self.league, i, &l.name);
+                }
+            });
+        if self.league != before {
+            self.pick = 0;
+        }
+        let league = &DATA.leagues[self.league];
+        self.pick = self.pick.min(league.teams.len() - 1);
+        egui::ComboBox::from_label("Team")
+            .selected_text(&league.teams[self.pick].name)
+            .height(400.0)
+            .show_ui(ui, |ui| {
+                for (i, t) in league.teams.iter().enumerate() {
+                    ui.selectable_value(&mut self.pick, i, format!("{} · {}", t.name, t.formation));
+                }
+            });
+        let season = DATA
+            .season
+            .map(|y| format!(" ({y}/{:02})", (y + 1) % 100))
+            .unwrap_or_default();
+        if ui
+            .button("Import")
+            .on_hover_text(format!("Most recent starting XI{season}"))
+            .clicked()
+        {
+            self.import(&league.teams[self.pick]);
+        }
+        if !self.import_note.is_empty() {
+            ui.weak(&self.import_note);
+        }
+    }
+
     /// Closest player whose token contains the screen point `p`.
     fn player_at(&self, p: Pos2, to_screen: &RectTransform, r: f32) -> Option<usize> {
         let d = |i: usize| (*to_screen * self.board.players[i]).distance(p);
@@ -377,6 +455,9 @@ impl Onze {
             ui.selectable_value(&mut self.labels, Labels::Both, "Both");
             ui.selectable_value(&mut self.labels, Labels::None, "None");
         });
+
+        ui.separator();
+        self.import_controls(ui);
 
         ui.separator();
         ui.label("Team");
@@ -808,6 +889,37 @@ mod tests {
         let s = load(&mem).unwrap();
         assert!(s.labels == Labels::Name);
         assert_eq!(s.team[0].number, 1);
+    }
+
+    #[test]
+    fn import_sets_formation_and_names_as_one_undo_step() {
+        // API-Football order: right to left within each line.
+        let grids = [
+            "1:1", "2:4", "2:3", "2:2", "2:1", "3:4", "3:3", "3:2", "3:1", "4:2", "4:1",
+        ];
+        let t = teams::Team {
+            name: "T".into(),
+            formation: "4-4-2".into(),
+            xi: grids
+                .iter()
+                .map(|g| teams::Pick {
+                    name: (*g).into(),
+                    number: 200,
+                    grid: (*g).into(),
+                })
+                .collect(),
+        };
+        let mut app = Onze::default();
+        app.import(&t);
+        assert_eq!(FORMATIONS[app.board.formation].name, "4-4-2");
+        assert_eq!(app.history.len(), 1);
+        let names: Vec<&str> = app.team.iter().map(|p| p.name.as_str()).collect();
+        // Slot 1 is our left-back, slot 9 our left striker.
+        assert_eq!(names[..2], ["1:1", "2:1"]);
+        assert_eq!(names[9..], ["4:1", "4:2"]);
+        assert_eq!(app.team[0].number, 99);
+        app.undo();
+        assert_eq!(app.board.formation, 0);
     }
 
     #[test]
