@@ -248,10 +248,10 @@ impl Onze {
 
         let mut f = self.board.formation;
         egui::ComboBox::from_label("Formation")
-            .selected_text(FORMATIONS[f].name)
+            .selected_text(FORMATIONS[f].label())
             .show_ui(ui, |ui| {
                 for (i, form) in FORMATIONS.iter().enumerate() {
-                    ui.selectable_value(&mut f, i, form.name);
+                    ui.selectable_value(&mut f, i, form.label());
                 }
             });
         if f != self.board.formation {
