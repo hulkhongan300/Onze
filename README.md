@@ -10,7 +10,8 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 - Move tool: box-select or click players, then drag them as a group
 - Freehand pen with 5 quick colours plus a custom one, and an eraser, drawn on top of the pitch
 - Right-click the pitch for a quick menu (tool, colour, undo, clear)
-- Hide player numbers for a minimal view; press `H` to hide the side panel
+- Type the team in the side panel: each player has an editable shirt number and name, kept when the formation changes
+- Label players by number, name, both (name under the token) or nothing; press `H` to hide the side panel
 - Undo (Ctrl/Cmd+Z), clear drawings, reset players
 - Save positions: moved players become their new spots (no dashed lines) for this session; a refresh or restart goes back to defaults
 
