@@ -74,6 +74,37 @@ impl Surface {
     }
 }
 
+/// What each player token shows.
+#[derive(Clone, Copy, PartialEq)]
+enum Labels {
+    Number,
+    Name,
+    Both,
+    None,
+}
+
+/// Shirt number and name, kept per player index so they survive formation changes.
+#[derive(Clone, PartialEq)]
+struct Player {
+    number: u8,
+    name: String,
+}
+
+impl Labels {
+    /// Text inside the circle and text below it. Name mode falls back to the number.
+    fn texts(self, p: &Player) -> (Option<String>, Option<&str>) {
+        let name = Some(p.name.trim()).filter(|n| !n.is_empty());
+        let number = Some(p.number.to_string());
+        match self {
+            Labels::Number => (number, None),
+            Labels::Name if name.is_some() => (None, name),
+            Labels::Name => (number, None),
+            Labels::Both => (number, name),
+            Labels::None => (None, None),
+        }
+    }
+}
+
 #[derive(Clone, PartialEq)]
 struct Line {
     points: Vec<Pos2>,
@@ -115,7 +146,9 @@ pub struct Onze {
     width: f32,
     surface: Surface,
     full_field: bool,
-    show_numbers: bool,
+    // Not on Board: typing names is not an undo step.
+    team: [Player; 11],
+    labels: Labels,
     show_grid: bool,
     show_panel: bool,
     selected: [bool; 11],
@@ -148,7 +181,11 @@ impl Default for Onze {
             width: 3.0,
             surface: Surface::White,
             full_field: false,
-            show_numbers: true,
+            team: std::array::from_fn(|i| Player {
+                number: i as u8 + 1,
+                name: String::new(),
+            }),
+            labels: Labels::Number,
             show_grid: false,
             show_panel: true,
             selected: [false; 11],
@@ -265,8 +302,27 @@ impl Onze {
             ui.selectable_value(&mut self.surface, Surface::Grass, "Grass");
         });
         ui.checkbox(&mut self.full_field, "Full field");
-        ui.checkbox(&mut self.show_numbers, "Show numbers");
         ui.checkbox(&mut self.show_grid, "Show grid");
+        ui.horizontal(|ui| {
+            ui.label("Labels");
+            ui.selectable_value(&mut self.labels, Labels::Number, "Number");
+            ui.selectable_value(&mut self.labels, Labels::Name, "Name");
+            ui.selectable_value(&mut self.labels, Labels::Both, "Both");
+            ui.selectable_value(&mut self.labels, Labels::None, "None");
+        });
+
+        ui.separator();
+        ui.label("Team");
+        for p in &mut self.team {
+            ui.horizontal(|ui| {
+                ui.add(egui::DragValue::new(&mut p.number).range(0..=99));
+                ui.add(
+                    egui::TextEdit::singleline(&mut p.name)
+                        .hint_text("Name")
+                        .desired_width(120.0),
+                );
+            });
+        }
 
         ui.separator();
         ui.label("Tool");
@@ -496,13 +552,23 @@ impl Onze {
             if self.tool == Tool::Move && self.selected[i] {
                 painter.circle_stroke(c, r + 3.0, Stroke::new(2.5, SELECTION));
             }
-            if self.show_numbers {
+            let (inside, below) = self.labels.texts(&self.team[i]);
+            if let Some(t) = inside {
                 painter.text(
                     c,
                     Align2::CENTER_CENTER,
-                    i + 1,
+                    t,
                     FontId::proportional(r),
                     Color32::WHITE,
+                );
+            }
+            if let Some(t) = below {
+                painter.text(
+                    c + vec2(0.0, r + 2.0),
+                    Align2::CENTER_TOP,
+                    t,
+                    FontId::proportional(0.8 * r),
+                    ink,
                 );
             }
         }
@@ -523,7 +589,11 @@ impl Onze {
 impl eframe::App for Onze {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         let ctx = ui.ctx().clone();
-        if ctx.input_mut(|i| i.consume_shortcut(&KeyboardShortcut::new(Modifiers::COMMAND, Key::Z)))
+        // While typing a name, Ctrl+Z belongs to the text field.
+        if !ctx.egui_wants_keyboard_input()
+            && ctx.input_mut(|i| {
+                i.consume_shortcut(&KeyboardShortcut::new(Modifiers::COMMAND, Key::Z))
+            })
         {
             self.undo();
         }
@@ -533,7 +603,9 @@ impl eframe::App for Onze {
             self.show_panel = !self.show_panel;
         }
         if self.show_panel {
-            egui::Panel::left("tools").show(ui, |ui| self.panel(ui));
+            egui::Panel::left("tools").show(ui, |ui| {
+                egui::ScrollArea::vertical().show(ui, |ui| self.panel(ui))
+            });
         }
         egui::CentralPanel::default().show(ui, |ui| self.pitch(ui));
     }
@@ -578,6 +650,30 @@ mod tests {
         assert_eq!(app.board.players, app.board.home);
         app.undo();
         assert_ne!(app.board.players, app.board.home);
+    }
+
+    #[test]
+    fn labels_fall_back_to_number_without_a_name() {
+        let mut p = Player {
+            number: 9,
+            name: " ".into(),
+        };
+        assert_eq!(Labels::Name.texts(&p), (Some("9".into()), None));
+        assert_eq!(Labels::Both.texts(&p), (Some("9".into()), None));
+        p.name = "Eusébio".into();
+        assert_eq!(Labels::Name.texts(&p), (None, Some("Eusébio")));
+        assert_eq!(Labels::Both.texts(&p), (Some("9".into()), Some("Eusébio")));
+        assert_eq!(Labels::None.texts(&p), (None, None));
+    }
+
+    #[test]
+    fn team_survives_formation_change() {
+        let mut app = Onze::default();
+        app.team[3].name = "Ruben".into();
+        app.edit(|b| b.set_formation(2));
+        app.edit(|b| b.set_formation(b.formation));
+        assert_eq!(app.team[3].name, "Ruben");
+        assert_eq!(app.team[10].number, 11);
     }
 
     #[test]
