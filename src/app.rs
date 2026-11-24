@@ -4,6 +4,7 @@ use eframe::egui::{
     Popup, Pos2, Rect, Sense, SetOpenCommand, Shape, Stroke, StrokeKind, Vec2,
     emath::RectTransform, pos2, vec2,
 };
+use serde::{Deserialize, Serialize};
 
 /// Real pitch size in metres, used for the markings.
 const W: f32 = 68.0;
@@ -48,7 +49,7 @@ fn clamp_delta(mut d: Vec2, start: &[Pos2; 11], who: &[usize], inset: f32) -> Ve
     d
 }
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, Serialize, Deserialize)]
 enum Surface {
     White,
     Grass,
@@ -75,7 +76,7 @@ impl Surface {
 }
 
 /// What each player token shows.
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, PartialEq, Serialize, Deserialize)]
 enum Labels {
     Number,
     Name,
@@ -84,7 +85,7 @@ enum Labels {
 }
 
 /// Shirt number and name, kept per player index so they survive formation changes.
-#[derive(Clone, PartialEq)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 struct Player {
     number: u8,
     name: String,
@@ -157,6 +158,27 @@ pub struct Onze {
     lasso: Option<Pos2>,
 }
 
+/// What survives a refresh or restart. Drawings and undo history are left out.
+/// `serde(default)` lets data saved by an older version fill in only the fields it has.
+#[derive(PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+struct Saved {
+    team: [Player; 11],
+    labels: Labels,
+    formation: usize,
+    players: [Pos2; 11],
+    home: [Pos2; 11],
+    surface: Surface,
+    full_field: bool,
+    color: Color32,
+}
+
+impl Default for Saved {
+    fn default() -> Self {
+        Onze::default().saved()
+    }
+}
+
 /// Players being dragged, with where they and the pointer started (grid units).
 struct Grab {
     origin: Pos2,
@@ -191,6 +213,51 @@ impl Default for Onze {
             selected: [false; 11],
             grab: None,
             lasso: None,
+        }
+    }
+}
+
+impl Onze {
+    /// Restores the last session's state, or the defaults if there is none or it doesn't decode.
+    pub fn new(cc: &eframe::CreationContext) -> Self {
+        cc.storage
+            .and_then(|s| eframe::get_value(s, eframe::APP_KEY))
+            .map_or_else(Self::default, Self::from_saved)
+    }
+
+    fn from_saved(s: Saved) -> Self {
+        let mut app = Self::default();
+        // A stale index (formation list changed) or off-grid spots keep the default board.
+        let on_grid =
+            |p: &Pos2| (0.0..=COLS as f32).contains(&p.x) && (0.0..=ROWS as f32).contains(&p.y);
+        if s.formation < FORMATIONS.len() {
+            app.board.set_formation(s.formation);
+            if s.players.iter().chain(&s.home).all(on_grid) {
+                app.board.players = s.players;
+                app.board.home = s.home;
+            }
+        }
+        app.team = s.team.map(|p| Player {
+            number: p.number.min(99),
+            ..p
+        });
+        app.labels = s.labels;
+        app.surface = s.surface;
+        app.full_field = s.full_field;
+        app.color = s.color;
+        app
+    }
+
+    fn saved(&self) -> Saved {
+        Saved {
+            team: self.team.clone(),
+            labels: self.labels,
+            formation: self.board.formation,
+            players: self.board.players,
+            home: self.board.home,
+            surface: self.surface,
+            full_field: self.full_field,
+            color: self.color,
         }
     }
 }
@@ -271,7 +338,7 @@ impl Onze {
                 self.board.players != self.board.home,
                 egui::Button::new("Save positions"),
             )
-            .on_hover_text("Make these the players' new spots (until refresh)")
+            .on_hover_text("Make these the players' new spots")
             .on_disabled_hover_text("No unsaved moves")
             .clicked()
         {
@@ -587,6 +654,10 @@ impl Onze {
 }
 
 impl eframe::App for Onze {
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
+        eframe::set_value(storage, eframe::APP_KEY, &self.saved());
+    }
+
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         let ctx = ui.ctx().clone();
         // While typing a name, Ctrl+Z belongs to the text field.
@@ -674,6 +745,69 @@ mod tests {
         app.edit(|b| b.set_formation(b.formation));
         assert_eq!(app.team[3].name, "Ruben");
         assert_eq!(app.team[10].number, 11);
+    }
+
+    #[derive(Default)]
+    struct Mem(std::collections::HashMap<String, String>);
+
+    impl eframe::Storage for Mem {
+        fn get_string(&self, key: &str) -> Option<String> {
+            self.0.get(key).cloned()
+        }
+        fn set_string(&mut self, key: &str, value: String) {
+            self.0.insert(key.into(), value);
+        }
+        fn remove_string(&mut self, key: &str) {
+            self.0.remove(key);
+        }
+        fn flush(&mut self) {}
+    }
+
+    fn load(mem: &Mem) -> Option<Saved> {
+        eframe::get_value(mem, eframe::APP_KEY)
+    }
+
+    #[test]
+    fn state_round_trips_through_storage() {
+        let mut app = Onze::default();
+        app.team[3].name = "Ruben".into();
+        app.team[9].number = 77;
+        app.labels = Labels::Both;
+        app.surface = Surface::Grass;
+        app.full_field = true;
+        app.color = PEN_COLORS[2].1;
+        app.edit(|b| b.set_formation(2));
+        app.edit(|b| b.players[5] = cell_center((0, 0)));
+        app.edit(|b| b.home = b.players);
+        let mut mem = Mem::default();
+        eframe::App::save(&mut app, &mut mem);
+        let back = Onze::from_saved(load(&mem).unwrap());
+        assert!(back.saved() == app.saved());
+    }
+
+    #[test]
+    fn bad_stored_state_falls_back_to_defaults() {
+        let mut s = Saved::default();
+        s.team[3].name = "Ruben".into();
+        s.formation = 999;
+        let app = Onze::from_saved(s);
+        assert_eq!(app.board.formation, 0);
+        assert!(app.board.players == Onze::default().board.players);
+        assert_eq!(app.team[3].name, "Ruben");
+
+        let mut s = Saved::default();
+        s.players[0] = pos2(f32::NAN, 500.0);
+        assert!(Onze::from_saved(s).board.players == Onze::default().board.players);
+
+        let mut mem = Mem::default();
+        mem.0.insert(eframe::APP_KEY.into(), "not ron".into());
+        assert!(load(&mem).is_none());
+        // Older data with fewer fields keeps what it has and defaults the rest.
+        mem.0
+            .insert(eframe::APP_KEY.into(), "(labels: Name)".into());
+        let s = load(&mem).unwrap();
+        assert!(s.labels == Labels::Name);
+        assert_eq!(s.team[0].number, 1);
     }
 
     #[test]
