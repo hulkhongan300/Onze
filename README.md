@@ -13,7 +13,7 @@ A football tactics board written in Rust with [egui](https://github.com/emilk/eg
 - Type the team in the side panel: each player has an editable shirt number and name, kept when the formation changes
 - Label players by number, name, both (name under the token) or nothing; press `H` to hide the side panel
 - Undo (Ctrl/Cmd+Z), clear drawings, reset players
-- Save positions: moved players become their new spots (no dashed lines) for this session; a refresh or restart goes back to defaults
+- Save positions: moved players become their new spots (no dashed lines) and are kept, with names, numbers, formation and pitch settings, across refreshes and restarts (drawings are not)
 
 ## Download
 

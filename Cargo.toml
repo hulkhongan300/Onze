@@ -5,12 +5,15 @@ edition = "2024"
 license = "Apache-2.0"
 description = "Football tactics board: formations, draggable players and freehand drawing"
 
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-eframe = "0.37.0"
+eframe = { version = "0.37.0", features = ["persistence"] }
 
 # Web: WebGL2 via glow. wgpu's WebGPU path leaves the page blank on some Chromium builds.
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-eframe = { version = "0.37.0", default-features = false, features = ["accesskit", "default_fonts", "glow", "web_screen_reader"] }
+eframe = { version = "0.37.0", default-features = false, features = ["accesskit", "default_fonts", "glow", "persistence", "web_screen_reader"] }
 wasm-bindgen-futures = "0.4.80"
 
 [profile.release]

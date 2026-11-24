@@ -13,7 +13,7 @@ fn main() -> eframe::Result {
     eframe::run_native(
         "Onze",
         options,
-        Box::new(|_cc| Ok(Box::new(app::Onze::default()))),
+        Box::new(|cc| Ok(Box::new(app::Onze::new(cc)))),
     )
 }
 
@@ -30,7 +30,7 @@ fn main() {
             .start(
                 canvas.clone(),
                 eframe::WebOptions::default(),
-                Box::new(|_cc| Ok(Box::new(app::Onze::default()))),
+                Box::new(|cc| Ok(Box::new(app::Onze::new(cc)))),
             )
             .await;
         // Show the failure on the page instead of leaving a blank canvas.
