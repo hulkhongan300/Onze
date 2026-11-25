@@ -1,1 +1,3619 @@
-{"season": null, "leagues": []}
+{
+ "season": 2024,
+ "leagues": [
+  {
+   "name": "Liga Portugal",
+   "teams": [
+    {
+     "name": "AVS",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Simão",
+       "number": 93,
+       "grid": "1:1"
+      },
+      {
+       "name": "Fernando Fonseca",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "Jorge Teixeira",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "C. Devenish",
+       "number": 42,
+       "grid": "2:2"
+      },
+      {
+       "name": "Rafael Rodrigues",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Gustavo Assunção",
+       "number": 12,
+       "grid": "3:2"
+      },
+      {
+       "name": "Jaume Grau",
+       "number": 15,
+       "grid": "3:1"
+      },
+      {
+       "name": "T. Akinsola",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "Lucas Piazón",
+       "number": 14,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. Mercado",
+       "number": 17,
+       "grid": "4:1"
+      },
+      {
+       "name": "Nenê",
+       "number": 18,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Arouca",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "João Valido",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Alex Pinto",
+       "number": 78,
+       "grid": "2:4"
+      },
+      {
+       "name": "Chico Lamba",
+       "number": 73,
+       "grid": "2:3"
+      },
+      {
+       "name": "José Fontán",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "Weverson",
+       "number": 26,
+       "grid": "2:1"
+      },
+      {
+       "name": "Pedro Santos",
+       "number": 89,
+       "grid": "3:2"
+      },
+      {
+       "name": "T. Fukui",
+       "number": 21,
+       "grid": "3:1"
+      },
+      {
+       "name": "Jason",
+       "number": 10,
+       "grid": "4:3"
+      },
+      {
+       "name": "A. Trezza",
+       "number": 19,
+       "grid": "4:2"
+      },
+      {
+       "name": "Miguel Puche",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "Henrique Araújo",
+       "number": 39,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Benfica",
+     "formation": "4-3-3",
+     "xi": [
+      {
+       "name": "A. Trubin",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Tomás Araújo",
+       "number": 44,
+       "grid": "2:4"
+      },
+      {
+       "name": "António Silva",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "N. Otamendi",
+       "number": 30,
+       "grid": "2:2"
+      },
+      {
+       "name": "Álvaro Fernández",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "L. Barreiro",
+       "number": 18,
+       "grid": "3:3"
+      },
+      {
+       "name": "Florentino",
+       "number": 61,
+       "grid": "3:2"
+      },
+      {
+       "name": "O. Kökçü",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "K. Aktürkoğlu",
+       "number": 17,
+       "grid": "4:3"
+      },
+      {
+       "name": "V. Pavlidis",
+       "number": 14,
+       "grid": "4:2"
+      },
+      {
+       "name": "A. Schjelderup",
+       "number": 21,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Boavista",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "T. Vaclík",
+       "number": 31,
+       "grid": "1:1"
+      },
+      {
+       "name": "Salvador Agra",
+       "number": 7,
+       "grid": "2:4"
+      },
+      {
+       "name": "R. Abascal",
+       "number": 26,
+       "grid": "2:3"
+      },
+      {
+       "name": "S. Fogning",
+       "number": 13,
+       "grid": "2:2"
+      },
+      {
+       "name": "Filipe Ferreira",
+       "number": 20,
+       "grid": "2:1"
+      },
+      {
+       "name": "S. Pérez",
+       "number": 24,
+       "grid": "3:2"
+      },
+      {
+       "name": "Joel Silva",
+       "number": 16,
+       "grid": "3:1"
+      },
+      {
+       "name": "Miguel Reisinho",
+       "number": 10,
+       "grid": "4:3"
+      },
+      {
+       "name": "M. van Ginkel",
+       "number": 8,
+       "grid": "4:2"
+      },
+      {
+       "name": "A. Diaby",
+       "number": 21,
+       "grid": "4:1"
+      },
+      {
+       "name": "R. Boženík",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Casa Pia",
+     "formation": "3-4-3",
+     "xi": [
+      {
+       "name": "Daniel Azevedo",
+       "number": 22,
+       "grid": "1:1"
+      },
+      {
+       "name": "João Goulart",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "José Fonte",
+       "number": 6,
+       "grid": "2:2"
+      },
+      {
+       "name": "D. Tchamba",
+       "number": 2,
+       "grid": "2:1"
+      },
+      {
+       "name": "André Geraldes",
+       "number": 18,
+       "grid": "3:4"
+      },
+      {
+       "name": "I. Mohamed",
+       "number": 24,
+       "grid": "3:3"
+      },
+      {
+       "name": "A. Kraev",
+       "number": 89,
+       "grid": "3:2"
+      },
+      {
+       "name": "F. Benaissa-Yahia",
+       "number": 12,
+       "grid": "3:1"
+      },
+      {
+       "name": "Gaizka Larrazabal",
+       "number": 72,
+       "grid": "4:3"
+      },
+      {
+       "name": "Cassiano",
+       "number": 90,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. Livolant",
+       "number": 29,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Estoril",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "K. Chamorro",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "K. Boma",
+       "number": 44,
+       "grid": "2:3"
+      },
+      {
+       "name": "F. Bacher",
+       "number": 25,
+       "grid": "2:2"
+      },
+      {
+       "name": "Pedro Amaral",
+       "number": 24,
+       "grid": "2:1"
+      },
+      {
+       "name": "Pedro Carvalho",
+       "number": 22,
+       "grid": "3:4"
+      },
+      {
+       "name": "J. Holsgrove",
+       "number": 10,
+       "grid": "3:3"
+      },
+      {
+       "name": "Vinicius Zanocelo",
+       "number": 7,
+       "grid": "3:2"
+      },
+      {
+       "name": "Gonçalo Costa",
+       "number": 18,
+       "grid": "3:1"
+      },
+      {
+       "name": "Y. Begraoui",
+       "number": 14,
+       "grid": "4:2"
+      },
+      {
+       "name": "João Carvalho",
+       "number": 12,
+       "grid": "4:1"
+      },
+      {
+       "name": "André Lacximicant",
+       "number": 19,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Estrela",
+     "formation": "4-3-3",
+     "xi": [
+      {
+       "name": "João Costa",
+       "number": 24,
+       "grid": "1:1"
+      },
+      {
+       "name": "Diogo Travassos",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "R. Pantalon",
+       "number": 27,
+       "grid": "2:3"
+      },
+      {
+       "name": "I. Dramé",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "Nilton Varela",
+       "number": 25,
+       "grid": "2:1"
+      },
+      {
+       "name": "Léo Cordeiro",
+       "number": 22,
+       "grid": "3:3"
+      },
+      {
+       "name": "A. Oudrhiri",
+       "number": 12,
+       "grid": "3:2"
+      },
+      {
+       "name": "A. Ruiz",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "L. Bucca",
+       "number": 26,
+       "grid": "4:3"
+      },
+      {
+       "name": "Kikas",
+       "number": 98,
+       "grid": "4:2"
+      },
+      {
+       "name": "Jovane Cabral",
+       "number": 97,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "FC Porto",
+     "formation": "3-4-3",
+     "xi": [
+      {
+       "name": "Diogo Costa",
+       "number": 99,
+       "grid": "1:1"
+      },
+      {
+       "name": "Martim Fernandes",
+       "number": 52,
+       "grid": "2:3"
+      },
+      {
+       "name": "Zé Pedro",
+       "number": 97,
+       "grid": "2:2"
+      },
+      {
+       "name": "Iván Marcano",
+       "number": 5,
+       "grid": "2:1"
+      },
+      {
+       "name": "João Mário",
+       "number": 23,
+       "grid": "3:4"
+      },
+      {
+       "name": "Fábio Vieira",
+       "number": 10,
+       "grid": "3:3"
+      },
+      {
+       "name": "A. Varela",
+       "number": 22,
+       "grid": "3:2"
+      },
+      {
+       "name": "Francisco Moura",
+       "number": 74,
+       "grid": "3:1"
+      },
+      {
+       "name": "Pepê",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "Samu Aghehowa",
+       "number": 9,
+       "grid": "4:2"
+      },
+      {
+       "name": "Rodrigo Mora",
+       "number": 86,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Famalicao",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "I. Zlobin",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Rodrigo Pinheiro",
+       "number": 17,
+       "grid": "2:4"
+      },
+      {
+       "name": "I. Ba",
+       "number": 55,
+       "grid": "2:3"
+      },
+      {
+       "name": "L. Realpe",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "Pedro Francisco",
+       "number": 13,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. van de Looi",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "M. De Amorim",
+       "number": 14,
+       "grid": "3:1"
+      },
+      {
+       "name": "Sorriso",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "Gustavo Sá",
+       "number": 20,
+       "grid": "4:2"
+      },
+      {
+       "name": "Óscar Aranda",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "S. Elisor",
+       "number": 12,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Farense",
+     "formation": "4-1-3-2",
+     "xi": [
+      {
+       "name": "Kaique",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Pastor",
+       "number": 28,
+       "grid": "2:4"
+      },
+      {
+       "name": "Marco Moreno",
+       "number": 3,
+       "grid": "2:3"
+      },
+      {
+       "name": "Cláudio Falcão",
+       "number": 29,
+       "grid": "2:2"
+      },
+      {
+       "name": "Paulo Victor",
+       "number": 2,
+       "grid": "2:1"
+      },
+      {
+       "name": "Neto",
+       "number": 6,
+       "grid": "3:1"
+      },
+      {
+       "name": "Rony Lopes",
+       "number": 20,
+       "grid": "4:3"
+      },
+      {
+       "name": "Marco Matias",
+       "number": 77,
+       "grid": "4:2"
+      },
+      {
+       "name": "Samuel Justo",
+       "number": 80,
+       "grid": "4:1"
+      },
+      {
+       "name": "Rui Costa",
+       "number": 19,
+       "grid": "5:2"
+      },
+      {
+       "name": "Darío Poveda",
+       "number": 14,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "GIL Vicente",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Brian Araújo",
+       "number": 99,
+       "grid": "1:1"
+      },
+      {
+       "name": "Zé Carlos",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "M. Elimbi",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "Jonathan Buatu",
+       "number": 39,
+       "grid": "2:2"
+      },
+      {
+       "name": "J. Mutombo",
+       "number": 45,
+       "grid": "2:1"
+      },
+      {
+       "name": "M. Bamba",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "F. Cáseres",
+       "number": 5,
+       "grid": "3:1"
+      },
+      {
+       "name": "Félix Correia",
+       "number": 71,
+       "grid": "4:3"
+      },
+      {
+       "name": "Sergio Bermejo",
+       "number": 22,
+       "grid": "4:2"
+      },
+      {
+       "name": "João Marques",
+       "number": 33,
+       "grid": "4:1"
+      },
+      {
+       "name": "Pablo",
+       "number": 90,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Moreirense",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Caio Secco",
+       "number": 22,
+       "grid": "1:1"
+      },
+      {
+       "name": "Dinis Pinto",
+       "number": 76,
+       "grid": "2:4"
+      },
+      {
+       "name": "Marcelo",
+       "number": 44,
+       "grid": "2:3"
+      },
+      {
+       "name": "Michel",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "Leonardo Buta",
+       "number": 15,
+       "grid": "2:1"
+      },
+      {
+       "name": "Benny",
+       "number": 20,
+       "grid": "3:2"
+      },
+      {
+       "name": "Ivo Rodrigues",
+       "number": 8,
+       "grid": "3:1"
+      },
+      {
+       "name": "Cedric Teguia",
+       "number": 17,
+       "grid": "4:3"
+      },
+      {
+       "name": "Alan",
+       "number": 11,
+       "grid": "4:2"
+      },
+      {
+       "name": "Joel Jorquera",
+       "number": 19,
+       "grid": "4:1"
+      },
+      {
+       "name": "Guilherme Schettine",
+       "number": 95,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Nacional",
+     "formation": "5-4-1",
+     "xi": [
+      {
+       "name": "Rui Encarnação",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "João Aurélio",
+       "number": 2,
+       "grid": "2:5"
+      },
+      {
+       "name": "Léo Santos",
+       "number": 34,
+       "grid": "2:4"
+      },
+      {
+       "name": "Matheus Dias",
+       "number": 88,
+       "grid": "2:3"
+      },
+      {
+       "name": "Zé Vitor",
+       "number": 38,
+       "grid": "2:2"
+      },
+      {
+       "name": "José Gomes",
+       "number": 5,
+       "grid": "2:1"
+      },
+      {
+       "name": "Rúben Macedo",
+       "number": 7,
+       "grid": "3:4"
+      },
+      {
+       "name": "D. Soumaré",
+       "number": 27,
+       "grid": "3:3"
+      },
+      {
+       "name": "André Sousa",
+       "number": 18,
+       "grid": "3:2"
+      },
+      {
+       "name": "Paulinho Bóia",
+       "number": 98,
+       "grid": "3:1"
+      },
+      {
+       "name": "J. Tagueu",
+       "number": 95,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Rio Ave",
+     "formation": "4-1-4-1",
+     "xi": [
+      {
+       "name": "C. Miszta",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "João Tomé",
+       "number": 20,
+       "grid": "2:4"
+      },
+      {
+       "name": "F. Petrasso",
+       "number": 23,
+       "grid": "2:3"
+      },
+      {
+       "name": "A. Ntoi",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "João Pedro",
+       "number": 22,
+       "grid": "2:1"
+      },
+      {
+       "name": "Vitor Gomes",
+       "number": 8,
+       "grid": "3:1"
+      },
+      {
+       "name": "André Luiz",
+       "number": 7,
+       "grid": "4:4"
+      },
+      {
+       "name": "Martim Neto",
+       "number": 76,
+       "grid": "4:3"
+      },
+      {
+       "name": "T. Bakoulas",
+       "number": 29,
+       "grid": "4:2"
+      },
+      {
+       "name": "Tiago Morais",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "Clayton",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "SC Braga",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "L. Horníček",
+       "number": 91,
+       "grid": "1:1"
+      },
+      {
+       "name": "Víctor Gómez",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "Paulo Oliveira",
+       "number": 15,
+       "grid": "2:3"
+      },
+      {
+       "name": "S. Niakaté",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Francisco Chissumba",
+       "number": 55,
+       "grid": "2:1"
+      },
+      {
+       "name": "João Moutinho",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "U. Račić",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "Roger Fernandes",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "R. Zalazar",
+       "number": 16,
+       "grid": "4:2"
+      },
+      {
+       "name": "Ricardo Horta",
+       "number": 21,
+       "grid": "4:1"
+      },
+      {
+       "name": "Afonso Patrão",
+       "number": 67,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Santa Clara",
+     "formation": "4-3-3",
+     "xi": [
+      {
+       "name": "Gabriel Batista",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Lucas Soares",
+       "number": 42,
+       "grid": "2:4"
+      },
+      {
+       "name": "Guilherme Ramos",
+       "number": 27,
+       "grid": "2:3"
+      },
+      {
+       "name": "Frederico Venâncio",
+       "number": 21,
+       "grid": "2:2"
+      },
+      {
+       "name": "Matheus Pereira",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Pedro Ferreira",
+       "number": 8,
+       "grid": "3:3"
+      },
+      {
+       "name": "Adriano Firmino",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Serginho",
+       "number": 35,
+       "grid": "3:1"
+      },
+      {
+       "name": "Vinícius Lopes",
+       "number": 70,
+       "grid": "4:3"
+      },
+      {
+       "name": "Wendel",
+       "number": 29,
+       "grid": "4:2"
+      },
+      {
+       "name": "Gabriel Silva",
+       "number": 11,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Sporting CP",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "Rui Silva",
+       "number": 24,
+       "grid": "1:1"
+      },
+      {
+       "name": "Eduardo Quaresma",
+       "number": 72,
+       "grid": "2:3"
+      },
+      {
+       "name": "O. Diomande",
+       "number": 26,
+       "grid": "2:2"
+      },
+      {
+       "name": "Gonçalo Inácio",
+       "number": 25,
+       "grid": "2:1"
+      },
+      {
+       "name": "Geny Catamo",
+       "number": 21,
+       "grid": "3:4"
+      },
+      {
+       "name": "Z. Debast",
+       "number": 6,
+       "grid": "3:3"
+      },
+      {
+       "name": "H. Morita",
+       "number": 5,
+       "grid": "3:2"
+      },
+      {
+       "name": "M. Araújo",
+       "number": 20,
+       "grid": "3:1"
+      },
+      {
+       "name": "Trincão",
+       "number": 17,
+       "grid": "4:2"
+      },
+      {
+       "name": "Pote",
+       "number": 8,
+       "grid": "4:1"
+      },
+      {
+       "name": "V. Gyökeres",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Vitória SC",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Bruno Varela",
+       "number": 14,
+       "grid": "1:1"
+      },
+      {
+       "name": "Miguel Maga",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "T. Borevković",
+       "number": 24,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Villanueva",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "João Teixeira Mendes",
+       "number": 13,
+       "grid": "2:1"
+      },
+      {
+       "name": "Beni",
+       "number": 16,
+       "grid": "3:2"
+      },
+      {
+       "name": "Tiago Silva",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "Telmo Arcanjo",
+       "number": 18,
+       "grid": "4:3"
+      },
+      {
+       "name": "João Mendes",
+       "number": 17,
+       "grid": "4:2"
+      },
+      {
+       "name": "Gustavo Silva",
+       "number": 71,
+       "grid": "4:1"
+      },
+      {
+       "name": "Nélson Oliveira",
+       "number": 7,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Vizela",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Miguel Ángel Morro",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Jójó",
+       "number": 77,
+       "grid": "2:4"
+      },
+      {
+       "name": "A. Correia",
+       "number": 41,
+       "grid": "2:3"
+      },
+      {
+       "name": "J. Rhyner",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "T. Ntolla",
+       "number": 99,
+       "grid": "2:1"
+      },
+      {
+       "name": "Yannick Semedo",
+       "number": 20,
+       "grid": "3:2"
+      },
+      {
+       "name": "Diogo Nascimento",
+       "number": 90,
+       "grid": "3:1"
+      },
+      {
+       "name": "D. Loppy",
+       "number": 97,
+       "grid": "4:3"
+      },
+      {
+       "name": "H. Mörschel",
+       "number": 24,
+       "grid": "4:2"
+      },
+      {
+       "name": "Ricardo Schutte",
+       "number": 33,
+       "grid": "4:1"
+      },
+      {
+       "name": "Vivaldo Semedo",
+       "number": 18,
+       "grid": "5:1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Premier League",
+   "teams": [
+    {
+     "name": "Arsenal",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "David Raya",
+       "number": 22,
+       "grid": "1:1"
+      },
+      {
+       "name": "B. White",
+       "number": 4,
+       "grid": "2:4"
+      },
+      {
+       "name": "J. Kiwior",
+       "number": 15,
+       "grid": "2:3"
+      },
+      {
+       "name": "K. Tierney",
+       "number": 3,
+       "grid": "2:2"
+      },
+      {
+       "name": "O. Zinchenko",
+       "number": 17,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. Partey",
+       "number": 5,
+       "grid": "3:2"
+      },
+      {
+       "name": "D. Rice",
+       "number": 41,
+       "grid": "3:1"
+      },
+      {
+       "name": "R. Sterling",
+       "number": 30,
+       "grid": "4:3"
+      },
+      {
+       "name": "E. Nwaneri",
+       "number": 53,
+       "grid": "4:2"
+      },
+      {
+       "name": "Gabriel Martinelli",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "Mikel Merino",
+       "number": 23,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Aston Villa",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "E. Martínez",
+       "number": 23,
+       "grid": "1:1"
+      },
+      {
+       "name": "M. Cash",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "E. Konsa",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "Pau Torres",
+       "number": 14,
+       "grid": "2:2"
+      },
+      {
+       "name": "I. Maatsen",
+       "number": 22,
+       "grid": "2:1"
+      },
+      {
+       "name": "B. Kamara",
+       "number": 44,
+       "grid": "3:2"
+      },
+      {
+       "name": "A. Onana",
+       "number": 24,
+       "grid": "3:1"
+      },
+      {
+       "name": "M. Rogers",
+       "number": 27,
+       "grid": "4:3"
+      },
+      {
+       "name": "Marco Asensio",
+       "number": 21,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. McGinn",
+       "number": 7,
+       "grid": "4:1"
+      },
+      {
+       "name": "O. Watkins",
+       "number": 11,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Bournemouth",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Kepa",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "A. Smith",
+       "number": 15,
+       "grid": "2:4"
+      },
+      {
+       "name": "I. Zabarnyi",
+       "number": 27,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Senesi",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "M. Kerkez",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. Adams",
+       "number": 12,
+       "grid": "3:2"
+      },
+      {
+       "name": "M. Tavernier",
+       "number": 16,
+       "grid": "3:1"
+      },
+      {
+       "name": "D. Brooks",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "J. Kluivert",
+       "number": 19,
+       "grid": "4:2"
+      },
+      {
+       "name": "A. Semenyo",
+       "number": 24,
+       "grid": "4:1"
+      },
+      {
+       "name": "Evanilson",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Brentford",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "M. Flekken",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "M. Kayode",
+       "number": 33,
+       "grid": "2:4"
+      },
+      {
+       "name": "N. Collins",
+       "number": 22,
+       "grid": "2:3"
+      },
+      {
+       "name": "S. van den Berg",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "K. Lewis-Potter",
+       "number": 23,
+       "grid": "2:1"
+      },
+      {
+       "name": "C. Nørgaard",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Y. Yarmoliuk",
+       "number": 18,
+       "grid": "3:1"
+      },
+      {
+       "name": "B. Mbeumo",
+       "number": 19,
+       "grid": "4:3"
+      },
+      {
+       "name": "M. Damsgaard",
+       "number": 24,
+       "grid": "4:2"
+      },
+      {
+       "name": "K. Schade",
+       "number": 7,
+       "grid": "4:1"
+      },
+      {
+       "name": "Y. Wissa",
+       "number": 11,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Brighton",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "B. Verbruggen",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "M. Wieffer",
+       "number": 27,
+       "grid": "2:4"
+      },
+      {
+       "name": "J. van Hecke",
+       "number": 29,
+       "grid": "2:3"
+      },
+      {
+       "name": "A. Webster",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Igor Julio",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "S. Adingra",
+       "number": 11,
+       "grid": "3:4"
+      },
+      {
+       "name": "C. Baleba",
+       "number": 20,
+       "grid": "3:3"
+      },
+      {
+       "name": "Y. Ayari",
+       "number": 26,
+       "grid": "3:2"
+      },
+      {
+       "name": "Y. Minteh",
+       "number": 17,
+       "grid": "3:1"
+      },
+      {
+       "name": "B. Gruda",
+       "number": 8,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. Hinshelwood",
+       "number": 41,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Chelsea",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Robert Sánchez",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "R. James",
+       "number": 24,
+       "grid": "2:4"
+      },
+      {
+       "name": "T. Adarabioyo",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "L. Colwill",
+       "number": 6,
+       "grid": "2:2"
+      },
+      {
+       "name": "Marc Cucurella",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "E. Fernández",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "M. Caicedo",
+       "number": 25,
+       "grid": "3:1"
+      },
+      {
+       "name": "N. Madueke",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "C. Palmer",
+       "number": 20,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. Sancho",
+       "number": 19,
+       "grid": "4:1"
+      },
+      {
+       "name": "Pedro Neto",
+       "number": 7,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Crystal Palace",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "D. Henderson",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "C. Richards",
+       "number": 26,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Lacroix",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "J. Lerma",
+       "number": 8,
+       "grid": "2:1"
+      },
+      {
+       "name": "D. Muñoz",
+       "number": 12,
+       "grid": "3:4"
+      },
+      {
+       "name": "W. Hughes",
+       "number": 19,
+       "grid": "3:3"
+      },
+      {
+       "name": "D. Kamada",
+       "number": 18,
+       "grid": "3:2"
+      },
+      {
+       "name": "T. Mitchell",
+       "number": 3,
+       "grid": "3:1"
+      },
+      {
+       "name": "I. Sarr",
+       "number": 7,
+       "grid": "4:2"
+      },
+      {
+       "name": "E. Eze",
+       "number": 10,
+       "grid": "4:1"
+      },
+      {
+       "name": "J. Mateta",
+       "number": 14,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Everton",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "J. Pickford",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "A. Young",
+       "number": 18,
+       "grid": "2:4"
+      },
+      {
+       "name": "J. O'Brien",
+       "number": 15,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Keane",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "V. Mykolenko",
+       "number": 19,
+       "grid": "2:1"
+      },
+      {
+       "name": "J. Garner",
+       "number": 37,
+       "grid": "3:2"
+      },
+      {
+       "name": "I. Gueye",
+       "number": 27,
+       "grid": "3:1"
+      },
+      {
+       "name": "J. Harrison",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "C. Alcaraz",
+       "number": 24,
+       "grid": "4:2"
+      },
+      {
+       "name": "I. Ndiaye",
+       "number": 10,
+       "grid": "4:1"
+      },
+      {
+       "name": "Beto",
+       "number": 14,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Fulham",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "B. Leno",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "K. Tete",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "J. Andersen",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "Jorge Cuenca",
+       "number": 15,
+       "grid": "2:2"
+      },
+      {
+       "name": "A. Robinson",
+       "number": 33,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. Cairney",
+       "number": 10,
+       "grid": "3:2"
+      },
+      {
+       "name": "S. Lukić",
+       "number": 20,
+       "grid": "3:1"
+      },
+      {
+       "name": "H. Wilson",
+       "number": 8,
+       "grid": "4:3"
+      },
+      {
+       "name": "Andreas Pereira",
+       "number": 18,
+       "grid": "4:2"
+      },
+      {
+       "name": "Adama Traoré",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "R. Jiménez",
+       "number": 7,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Ipswich",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "C. Walton",
+       "number": 28,
+       "grid": "1:1"
+      },
+      {
+       "name": "A. Tuanzebe",
+       "number": 40,
+       "grid": "2:4"
+      },
+      {
+       "name": "D. O'Shea",
+       "number": 26,
+       "grid": "2:3"
+      },
+      {
+       "name": "J. Greaves",
+       "number": 24,
+       "grid": "2:2"
+      },
+      {
+       "name": "L. Davis",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Sam Morsy",
+       "number": 5,
+       "grid": "3:2"
+      },
+      {
+       "name": "J. Cajuste",
+       "number": 12,
+       "grid": "3:1"
+      },
+      {
+       "name": "O. Hutchinson",
+       "number": 20,
+       "grid": "4:3"
+      },
+      {
+       "name": "C. Chaplin",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "N. Broadhead",
+       "number": 33,
+       "grid": "4:1"
+      },
+      {
+       "name": "G. Hirst",
+       "number": 27,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Leicester",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "J. Stolarczyk",
+       "number": 41,
+       "grid": "1:1"
+      },
+      {
+       "name": "J. Justin",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "W. Faes",
+       "number": 3,
+       "grid": "2:3"
+      },
+      {
+       "name": "C. Coady",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "L. Thomas",
+       "number": 33,
+       "grid": "2:1"
+      },
+      {
+       "name": "O. Skipp",
+       "number": 22,
+       "grid": "3:2"
+      },
+      {
+       "name": "B. Soumaré",
+       "number": 24,
+       "grid": "3:1"
+      },
+      {
+       "name": "K. McAteer",
+       "number": 35,
+       "grid": "4:3"
+      },
+      {
+       "name": "J. Ayew",
+       "number": 18,
+       "grid": "4:2"
+      },
+      {
+       "name": "V. Kristiansen",
+       "number": 16,
+       "grid": "4:1"
+      },
+      {
+       "name": "P. Daka",
+       "number": 20,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Liverpool",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Alisson Becker",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "C. Bradley",
+       "number": 84,
+       "grid": "2:4"
+      },
+      {
+       "name": "I. Konaté",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "V. van Dijk",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "A. Robertson",
+       "number": 26,
+       "grid": "2:1"
+      },
+      {
+       "name": "R. Gravenberch",
+       "number": 38,
+       "grid": "3:2"
+      },
+      {
+       "name": "C. Jones",
+       "number": 17,
+       "grid": "3:1"
+      },
+      {
+       "name": "Mohamed Salah",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "D. Szoboszlai",
+       "number": 8,
+       "grid": "4:2"
+      },
+      {
+       "name": "C. Gakpo",
+       "number": 18,
+       "grid": "4:1"
+      },
+      {
+       "name": "L. Díaz",
+       "number": 7,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Manchester City",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Ederson",
+       "number": 31,
+       "grid": "1:1"
+      },
+      {
+       "name": "Matheus Nunes",
+       "number": 27,
+       "grid": "2:4"
+      },
+      {
+       "name": "Rúben Dias",
+       "number": 3,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Akanji",
+       "number": 25,
+       "grid": "2:2"
+      },
+      {
+       "name": "J. Gvardiol",
+       "number": 24,
+       "grid": "2:1"
+      },
+      {
+       "name": "Bernardo Silva",
+       "number": 20,
+       "grid": "3:2"
+      },
+      {
+       "name": "Nico González",
+       "number": 14,
+       "grid": "3:1"
+      },
+      {
+       "name": "Omar Marmoush",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "İ. Gündoğan",
+       "number": 19,
+       "grid": "4:2"
+      },
+      {
+       "name": "J. Doku",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "E. Haaland",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Manchester United",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "A. Bayındır",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "V. Lindelöf",
+       "number": 2,
+       "grid": "2:3"
+      },
+      {
+       "name": "H. Maguire",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "A. Heaven",
+       "number": 26,
+       "grid": "2:1"
+      },
+      {
+       "name": "N. Mazraoui",
+       "number": 3,
+       "grid": "3:4"
+      },
+      {
+       "name": "Bruno Fernandes",
+       "number": 8,
+       "grid": "3:3"
+      },
+      {
+       "name": "Casemiro",
+       "number": 18,
+       "grid": "3:2"
+      },
+      {
+       "name": "P. Dorgu",
+       "number": 13,
+       "grid": "3:1"
+      },
+      {
+       "name": "A. Diallo",
+       "number": 16,
+       "grid": "4:2"
+      },
+      {
+       "name": "M. Mount",
+       "number": 7,
+       "grid": "4:1"
+      },
+      {
+       "name": "R. Højlund",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Newcastle",
+     "formation": "3-4-3",
+     "xi": [
+      {
+       "name": "N. Pope",
+       "number": 22,
+       "grid": "1:1"
+      },
+      {
+       "name": "F. Schär",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "S. Botman",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "D. Burn",
+       "number": 33,
+       "grid": "2:1"
+      },
+      {
+       "name": "J. Murphy",
+       "number": 23,
+       "grid": "3:4"
+      },
+      {
+       "name": "Bruno Guimarães",
+       "number": 39,
+       "grid": "3:3"
+      },
+      {
+       "name": "S. Tonali",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "T. Livramento",
+       "number": 21,
+       "grid": "3:1"
+      },
+      {
+       "name": "H. Barnes",
+       "number": 11,
+       "grid": "4:3"
+      },
+      {
+       "name": "A. Isak",
+       "number": 14,
+       "grid": "4:2"
+      },
+      {
+       "name": "A. Gordon",
+       "number": 10,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Nottingham Forest",
+     "formation": "4-3-1-2",
+     "xi": [
+      {
+       "name": "M. Sels",
+       "number": 26,
+       "grid": "1:1"
+      },
+      {
+       "name": "O. Aina",
+       "number": 34,
+       "grid": "2:4"
+      },
+      {
+       "name": "N. Milenković",
+       "number": 31,
+       "grid": "2:3"
+      },
+      {
+       "name": "Murillo",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "N. Williams",
+       "number": 7,
+       "grid": "2:1"
+      },
+      {
+       "name": "N. Domínguez",
+       "number": 16,
+       "grid": "3:3"
+      },
+      {
+       "name": "I. Sangaré",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "E. Anderson",
+       "number": 8,
+       "grid": "3:1"
+      },
+      {
+       "name": "M. Gibbs-White",
+       "number": 10,
+       "grid": "4:1"
+      },
+      {
+       "name": "A. Elanga",
+       "number": 21,
+       "grid": "5:2"
+      },
+      {
+       "name": "C. Wood",
+       "number": 11,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Southampton",
+     "formation": "5-4-1",
+     "xi": [
+      {
+       "name": "A. Ramsdale",
+       "number": 30,
+       "grid": "1:1"
+      },
+      {
+       "name": "Y. Sugawara",
+       "number": 16,
+       "grid": "2:5"
+      },
+      {
+       "name": "F. Downes",
+       "number": 4,
+       "grid": "2:4"
+      },
+      {
+       "name": "N. Wood-Gordon",
+       "number": 15,
+       "grid": "2:3"
+      },
+      {
+       "name": "C. Taylor",
+       "number": 21,
+       "grid": "2:2"
+      },
+      {
+       "name": "Welington",
+       "number": 34,
+       "grid": "2:1"
+      },
+      {
+       "name": "J. Robinson",
+       "number": 46,
+       "grid": "3:4"
+      },
+      {
+       "name": "Mateus Fernandes",
+       "number": 18,
+       "grid": "3:3"
+      },
+      {
+       "name": "L. Ugochukwu",
+       "number": 26,
+       "grid": "3:2"
+      },
+      {
+       "name": "K. Sulemana",
+       "number": 20,
+       "grid": "3:1"
+      },
+      {
+       "name": "R. Stewart",
+       "number": 11,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Tottenham",
+     "formation": "4-3-3",
+     "xi": [
+      {
+       "name": "G. Vicario",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Pedro Porro",
+       "number": 23,
+       "grid": "2:4"
+      },
+      {
+       "name": "K. Danso",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. van de Ven",
+       "number": 37,
+       "grid": "2:2"
+      },
+      {
+       "name": "D. Udogie",
+       "number": 13,
+       "grid": "2:1"
+      },
+      {
+       "name": "A. Gray",
+       "number": 14,
+       "grid": "3:3"
+      },
+      {
+       "name": "R. Bentancur",
+       "number": 30,
+       "grid": "3:2"
+      },
+      {
+       "name": "P. Sarr",
+       "number": 29,
+       "grid": "3:1"
+      },
+      {
+       "name": "B. Johnson",
+       "number": 22,
+       "grid": "4:3"
+      },
+      {
+       "name": "D. Solanke",
+       "number": 19,
+       "grid": "4:2"
+      },
+      {
+       "name": "M. Tel",
+       "number": 11,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "West Ham",
+     "formation": "3-1-4-2",
+     "xi": [
+      {
+       "name": "Ł. Fabiański",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "J. Todibo",
+       "number": 25,
+       "grid": "2:3"
+      },
+      {
+       "name": "K. Mavropanos",
+       "number": 15,
+       "grid": "2:2"
+      },
+      {
+       "name": "M. Kilman",
+       "number": 26,
+       "grid": "2:1"
+      },
+      {
+       "name": "Edson Álvarez",
+       "number": 19,
+       "grid": "3:1"
+      },
+      {
+       "name": "A. Wan-Bissaka",
+       "number": 29,
+       "grid": "4:4"
+      },
+      {
+       "name": "J. Ward-Prowse",
+       "number": 8,
+       "grid": "4:3"
+      },
+      {
+       "name": "T. Souček",
+       "number": 28,
+       "grid": "4:2"
+      },
+      {
+       "name": "O. Scarles",
+       "number": 57,
+       "grid": "4:1"
+      },
+      {
+       "name": "J. Bowen",
+       "number": 20,
+       "grid": "5:2"
+      },
+      {
+       "name": "N. Füllkrug",
+       "number": 11,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Wolves",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "José Sá",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "M. Doherty",
+       "number": 2,
+       "grid": "2:3"
+      },
+      {
+       "name": "E. Agbadou",
+       "number": 12,
+       "grid": "2:2"
+      },
+      {
+       "name": "Toti Gomes",
+       "number": 24,
+       "grid": "2:1"
+      },
+      {
+       "name": "Nélson Semedo",
+       "number": 22,
+       "grid": "3:4"
+      },
+      {
+       "name": "André",
+       "number": 7,
+       "grid": "3:3"
+      },
+      {
+       "name": "João Gomes",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "R. Aït-Nouri",
+       "number": 3,
+       "grid": "3:1"
+      },
+      {
+       "name": "M. Munetsi",
+       "number": 5,
+       "grid": "4:2"
+      },
+      {
+       "name": "Matheus Cunha",
+       "number": 10,
+       "grid": "4:1"
+      },
+      {
+       "name": "Gonçalo Guedes",
+       "number": 29,
+       "grid": "5:1"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "La Liga",
+   "teams": [
+    {
+     "name": "Alaves",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Antonio Sivera",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "N. Tenaglia",
+       "number": 14,
+       "grid": "2:4"
+      },
+      {
+       "name": "F. Garcés",
+       "number": 2,
+       "grid": "2:3"
+      },
+      {
+       "name": "A. Sedlar",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Manu Sánchez",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "C. Benavídez",
+       "number": 23,
+       "grid": "3:2"
+      },
+      {
+       "name": "Antonio Blanco",
+       "number": 8,
+       "grid": "3:1"
+      },
+      {
+       "name": "Carlos Vicente",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "Jon Guridi",
+       "number": 18,
+       "grid": "4:2"
+      },
+      {
+       "name": "Carles Aleñá",
+       "number": 21,
+       "grid": "4:1"
+      },
+      {
+       "name": "Kike García",
+       "number": 17,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Athletic Club",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Unai Simón",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "De Marcos",
+       "number": 18,
+       "grid": "2:4"
+      },
+      {
+       "name": "Unai Núñez",
+       "number": 14,
+       "grid": "2:3"
+      },
+      {
+       "name": "Aitor Paredes",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Yuri",
+       "number": 17,
+       "grid": "2:1"
+      },
+      {
+       "name": "Ruíz de Galarreta",
+       "number": 16,
+       "grid": "3:2"
+      },
+      {
+       "name": "Mikel Jauregizar",
+       "number": 23,
+       "grid": "3:1"
+      },
+      {
+       "name": "Álex Berenguer",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "Unai Gómez",
+       "number": 20,
+       "grid": "4:2"
+      },
+      {
+       "name": "Nico Williams",
+       "number": 10,
+       "grid": "4:1"
+      },
+      {
+       "name": "Maroan Sannadi",
+       "number": 21,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Atletico Madrid",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "J. Musso",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "N. Molina",
+       "number": 16,
+       "grid": "2:4"
+      },
+      {
+       "name": "A. Witsel",
+       "number": 20,
+       "grid": "2:3"
+      },
+      {
+       "name": "C. Lenglet",
+       "number": 15,
+       "grid": "2:2"
+      },
+      {
+       "name": "César Azpilicueta",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Marcos Llorente",
+       "number": 14,
+       "grid": "3:4"
+      },
+      {
+       "name": "R. De Paul",
+       "number": 5,
+       "grid": "3:3"
+      },
+      {
+       "name": "Koke",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Samuel Lino",
+       "number": 12,
+       "grid": "3:1"
+      },
+      {
+       "name": "J. Alvarez",
+       "number": 19,
+       "grid": "4:2"
+      },
+      {
+       "name": "A. Griezmann",
+       "number": 7,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Barcelona",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Iñaki Peña",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Eric García",
+       "number": 24,
+       "grid": "2:4"
+      },
+      {
+       "name": "R. Araujo",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "Pau Cubarsí",
+       "number": 2,
+       "grid": "2:2"
+      },
+      {
+       "name": "Alejandro Balde",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Gavi",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Pedri",
+       "number": 8,
+       "grid": "3:1"
+      },
+      {
+       "name": "Lamine Yamal",
+       "number": 19,
+       "grid": "4:3"
+      },
+      {
+       "name": "Fermín López",
+       "number": 16,
+       "grid": "4:2"
+      },
+      {
+       "name": "Raphinha",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "R. Lewandowski",
+       "number": 9,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Celta Vigo",
+     "formation": "3-4-2-1",
+     "xi": [
+      {
+       "name": "Vicente Guaita",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Javi Rodríguez",
+       "number": 32,
+       "grid": "2:3"
+      },
+      {
+       "name": "Carlos Domínguez",
+       "number": 24,
+       "grid": "2:2"
+      },
+      {
+       "name": "Marcos Alonso",
+       "number": 20,
+       "grid": "2:1"
+      },
+      {
+       "name": "Óscar Mingueza",
+       "number": 3,
+       "grid": "3:4"
+      },
+      {
+       "name": "Fran Beltrán",
+       "number": 8,
+       "grid": "3:3"
+      },
+      {
+       "name": "I. Moriba",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Sergio Carreira",
+       "number": 5,
+       "grid": "3:1"
+      },
+      {
+       "name": "Iago Aspas",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "Alfon González",
+       "number": 12,
+       "grid": "4:1"
+      },
+      {
+       "name": "Borja Iglesias",
+       "number": 7,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Espanyol",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Joan García",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "O. El Hilali",
+       "number": 23,
+       "grid": "2:4"
+      },
+      {
+       "name": "Fernando Calero",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "L. Cabrera",
+       "number": 6,
+       "grid": "2:2"
+      },
+      {
+       "name": "Carlos Romero",
+       "number": 22,
+       "grid": "2:1"
+      },
+      {
+       "name": "Urko González",
+       "number": 19,
+       "grid": "3:2"
+      },
+      {
+       "name": "Pol Lozano",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "Jofre Carreras",
+       "number": 17,
+       "grid": "4:3"
+      },
+      {
+       "name": "Edu Expósito",
+       "number": 8,
+       "grid": "4:2"
+      },
+      {
+       "name": "Javi Puado",
+       "number": 7,
+       "grid": "4:1"
+      },
+      {
+       "name": "Roberto Fernández",
+       "number": 2,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Getafe",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "David Soria",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "A. Nyom",
+       "number": 12,
+       "grid": "2:4"
+      },
+      {
+       "name": "Domingos Duarte",
+       "number": 22,
+       "grid": "2:3"
+      },
+      {
+       "name": "Juan Berrocal",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Diego Rico",
+       "number": 16,
+       "grid": "2:1"
+      },
+      {
+       "name": "Juan Iglesias",
+       "number": 21,
+       "grid": "3:4"
+      },
+      {
+       "name": "M. Arambarri",
+       "number": 8,
+       "grid": "3:3"
+      },
+      {
+       "name": "D. Dakonam",
+       "number": 2,
+       "grid": "3:2"
+      },
+      {
+       "name": "C. Uche",
+       "number": 6,
+       "grid": "3:1"
+      },
+      {
+       "name": "Ramon Terrats",
+       "number": 11,
+       "grid": "4:2"
+      },
+      {
+       "name": "Borja Mayoral",
+       "number": 9,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Girona",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "V. Krapyvtsov",
+       "number": 25,
+       "grid": "1:1"
+      },
+      {
+       "name": "Arnau Martínez",
+       "number": 4,
+       "grid": "2:4"
+      },
+      {
+       "name": "Alejandro Francés",
+       "number": 16,
+       "grid": "2:3"
+      },
+      {
+       "name": "L. Krejčí",
+       "number": 18,
+       "grid": "2:2"
+      },
+      {
+       "name": "D. Blind",
+       "number": 17,
+       "grid": "2:1"
+      },
+      {
+       "name": "V. Tsygankov",
+       "number": 8,
+       "grid": "3:4"
+      },
+      {
+       "name": "Y. Herrera",
+       "number": 21,
+       "grid": "3:3"
+      },
+      {
+       "name": "Arthur",
+       "number": 12,
+       "grid": "3:2"
+      },
+      {
+       "name": "Y. Asprilla",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "C. Stuani",
+       "number": 7,
+       "grid": "4:2"
+      },
+      {
+       "name": "Portu",
+       "number": 24,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Las Palmas",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "D. Horkaš",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Marvin Park",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "Juanma Herzog",
+       "number": 28,
+       "grid": "2:3"
+      },
+      {
+       "name": "S. McKenna",
+       "number": 15,
+       "grid": "2:2"
+      },
+      {
+       "name": "Mika Mármol",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "E. Loiodice",
+       "number": 12,
+       "grid": "3:2"
+      },
+      {
+       "name": "Dário Essugo",
+       "number": 29,
+       "grid": "3:1"
+      },
+      {
+       "name": "Manu Fuster",
+       "number": 14,
+       "grid": "4:3"
+      },
+      {
+       "name": "Sergio Viera",
+       "number": 33,
+       "grid": "4:2"
+      },
+      {
+       "name": "Benito Ramírez",
+       "number": 11,
+       "grid": "4:1"
+      },
+      {
+       "name": "Jaime Mata",
+       "number": 17,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Leganes",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "M. Dmitrović",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Adrià Alti",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "Jorge Sáenz",
+       "number": 3,
+       "grid": "2:3"
+      },
+      {
+       "name": "Sergio González",
+       "number": 6,
+       "grid": "2:2"
+      },
+      {
+       "name": "Javi Hernández",
+       "number": 20,
+       "grid": "2:1"
+      },
+      {
+       "name": "Juan Cruz",
+       "number": 11,
+       "grid": "3:4"
+      },
+      {
+       "name": "S. Cissé",
+       "number": 8,
+       "grid": "3:3"
+      },
+      {
+       "name": "R. Tapia",
+       "number": 5,
+       "grid": "3:2"
+      },
+      {
+       "name": "Y. Diomande",
+       "number": 30,
+       "grid": "3:1"
+      },
+      {
+       "name": "Dani Raba",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "M. El Haddadi",
+       "number": 23,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Mallorca",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "D. Greif",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Mateu Morey",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "David López",
+       "number": 32,
+       "grid": "2:3"
+      },
+      {
+       "name": "Raíllo",
+       "number": 21,
+       "grid": "2:2"
+      },
+      {
+       "name": "Toni Lato",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Antonio Sánchez",
+       "number": 18,
+       "grid": "3:4"
+      },
+      {
+       "name": "Samú Costa",
+       "number": 12,
+       "grid": "3:3"
+      },
+      {
+       "name": "Omar Mascarell",
+       "number": 5,
+       "grid": "3:2"
+      },
+      {
+       "name": "Darder",
+       "number": 10,
+       "grid": "3:1"
+      },
+      {
+       "name": "V. Muriqi",
+       "number": 7,
+       "grid": "4:2"
+      },
+      {
+       "name": "Marc Domenech",
+       "number": 30,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Osasuna",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Sergio Herrera",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "Jesús Areso",
+       "number": 12,
+       "grid": "2:4"
+      },
+      {
+       "name": "E. Boyomo",
+       "number": 22,
+       "grid": "2:3"
+      },
+      {
+       "name": "Catena",
+       "number": 24,
+       "grid": "2:2"
+      },
+      {
+       "name": "Juan Cruz",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "Pablo Ibáñez",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "Lucas Torró",
+       "number": 6,
+       "grid": "3:1"
+      },
+      {
+       "name": "Rubén García",
+       "number": 14,
+       "grid": "4:3"
+      },
+      {
+       "name": "Aimar Oroz",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "Bryan Zaragoza",
+       "number": 19,
+       "grid": "4:1"
+      },
+      {
+       "name": "A. Budimir",
+       "number": 17,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Rayo Vallecano",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "A. Batalla",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "I. Balliu",
+       "number": 20,
+       "grid": "2:4"
+      },
+      {
+       "name": "F. Lejeune",
+       "number": 24,
+       "grid": "2:3"
+      },
+      {
+       "name": "Aridane Hernández",
+       "number": 5,
+       "grid": "2:2"
+      },
+      {
+       "name": "Pep Chavarría",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "P. Ciss",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Unai López",
+       "number": 17,
+       "grid": "3:1"
+      },
+      {
+       "name": "A. Rațiu",
+       "number": 2,
+       "grid": "4:3"
+      },
+      {
+       "name": "Isi Palazón",
+       "number": 7,
+       "grid": "4:2"
+      },
+      {
+       "name": "Álvaro García",
+       "number": 18,
+       "grid": "4:1"
+      },
+      {
+       "name": "Jorge de Frutos",
+       "number": 19,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Real Betis",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Adrián",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Aitor Ruibal",
+       "number": 24,
+       "grid": "2:4"
+      },
+      {
+       "name": "Marc Bartra",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "Natan",
+       "number": 6,
+       "grid": "2:2"
+      },
+      {
+       "name": "R. Rodríguez",
+       "number": 12,
+       "grid": "2:1"
+      },
+      {
+       "name": "Pablo Fornals",
+       "number": 18,
+       "grid": "3:2"
+      },
+      {
+       "name": "Sergi Altimira",
+       "number": 16,
+       "grid": "3:1"
+      },
+      {
+       "name": "Antony",
+       "number": 7,
+       "grid": "4:3"
+      },
+      {
+       "name": "Isco",
+       "number": 22,
+       "grid": "4:2"
+      },
+      {
+       "name": "Jesús Rodríguez",
+       "number": 36,
+       "grid": "4:1"
+      },
+      {
+       "name": "C. Hernández",
+       "number": 19,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Real Madrid",
+     "formation": "4-3-3",
+     "xi": [
+      {
+       "name": "A. Lunin",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Lucas Vázquez",
+       "number": 17,
+       "grid": "2:4"
+      },
+      {
+       "name": "A. Tchouaméni",
+       "number": 14,
+       "grid": "2:3"
+      },
+      {
+       "name": "Raúl Asencio",
+       "number": 35,
+       "grid": "2:2"
+      },
+      {
+       "name": "Fran García",
+       "number": 20,
+       "grid": "2:1"
+      },
+      {
+       "name": "L. Modrić",
+       "number": 10,
+       "grid": "3:3"
+      },
+      {
+       "name": "F. Valverde",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "Dani Ceballos",
+       "number": 19,
+       "grid": "3:1"
+      },
+      {
+       "name": "A. Güler",
+       "number": 15,
+       "grid": "4:3"
+      },
+      {
+       "name": "K. Mbappé",
+       "number": 9,
+       "grid": "4:2"
+      },
+      {
+       "name": "Brahim Díaz",
+       "number": 21,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Real Sociedad",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "Unai Marrero",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "J. Aramburu",
+       "number": 19,
+       "grid": "2:4"
+      },
+      {
+       "name": "Jon Martín",
+       "number": 31,
+       "grid": "2:3"
+      },
+      {
+       "name": "Jon Pacheco",
+       "number": 20,
+       "grid": "2:2"
+      },
+      {
+       "name": "Aihen Muñoz",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. Kubo",
+       "number": 14,
+       "grid": "3:4"
+      },
+      {
+       "name": "Pablo Marín",
+       "number": 28,
+       "grid": "3:3"
+      },
+      {
+       "name": "Beñat Turrientes",
+       "number": 22,
+       "grid": "3:2"
+      },
+      {
+       "name": "Sergio Gómez",
+       "number": 17,
+       "grid": "3:1"
+      },
+      {
+       "name": "L. Sučić",
+       "number": 24,
+       "grid": "4:2"
+      },
+      {
+       "name": "Arkaitz Mariezkurrena",
+       "number": 40,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Sevilla",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "Álvaro Fernández",
+       "number": 1,
+       "grid": "1:1"
+      },
+      {
+       "name": "José Ángel Carmona",
+       "number": 2,
+       "grid": "2:4"
+      },
+      {
+       "name": "Kike Salas",
+       "number": 4,
+       "grid": "2:3"
+      },
+      {
+       "name": "Marcão",
+       "number": 23,
+       "grid": "2:2"
+      },
+      {
+       "name": "Adrià Pedrosa",
+       "number": 3,
+       "grid": "2:1"
+      },
+      {
+       "name": "L. Agoumé",
+       "number": 18,
+       "grid": "3:2"
+      },
+      {
+       "name": "N. Gudelj",
+       "number": 6,
+       "grid": "3:1"
+      },
+      {
+       "name": "Juanlu Sánchez",
+       "number": 26,
+       "grid": "4:3"
+      },
+      {
+       "name": "Suso",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "D. Sow",
+       "number": 20,
+       "grid": "4:1"
+      },
+      {
+       "name": "Álvaro García",
+       "number": 42,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Valencia",
+     "formation": "4-2-3-1",
+     "xi": [
+      {
+       "name": "G. Mamardashvili",
+       "number": 25,
+       "grid": "1:1"
+      },
+      {
+       "name": "Cristhian Mosquera",
+       "number": 3,
+       "grid": "2:4"
+      },
+      {
+       "name": "César Tárrega",
+       "number": 15,
+       "grid": "2:3"
+      },
+      {
+       "name": "M. Diakhaby",
+       "number": 4,
+       "grid": "2:2"
+      },
+      {
+       "name": "Jesús Vázquez",
+       "number": 21,
+       "grid": "2:1"
+      },
+      {
+       "name": "Javi Guerra",
+       "number": 8,
+       "grid": "3:2"
+      },
+      {
+       "name": "E. Barrenechea",
+       "number": 5,
+       "grid": "3:1"
+      },
+      {
+       "name": "Fran Pérez",
+       "number": 23,
+       "grid": "4:3"
+      },
+      {
+       "name": "André Almeida",
+       "number": 10,
+       "grid": "4:2"
+      },
+      {
+       "name": "Diego López",
+       "number": 16,
+       "grid": "4:1"
+      },
+      {
+       "name": "U. Sadiq",
+       "number": 12,
+       "grid": "5:1"
+      }
+     ]
+    },
+    {
+     "name": "Valladolid",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "K. Hein",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "A. Candela",
+       "number": 22,
+       "grid": "2:4"
+      },
+      {
+       "name": "J. Aidoo",
+       "number": 16,
+       "grid": "2:3"
+      },
+      {
+       "name": "E. Cömert",
+       "number": 15,
+       "grid": "2:2"
+      },
+      {
+       "name": "Henrique",
+       "number": 17,
+       "grid": "2:1"
+      },
+      {
+       "name": "A. Tuhami",
+       "number": 23,
+       "grid": "3:4"
+      },
+      {
+       "name": "T. Nikitscher",
+       "number": 4,
+       "grid": "3:3"
+      },
+      {
+       "name": "I. Alani",
+       "number": 38,
+       "grid": "3:2"
+      },
+      {
+       "name": "Raúl Moro",
+       "number": 11,
+       "grid": "3:1"
+      },
+      {
+       "name": "M. Sylla",
+       "number": 7,
+       "grid": "4:2"
+      },
+      {
+       "name": "Juanmi Latasa",
+       "number": 14,
+       "grid": "4:1"
+      }
+     ]
+    },
+    {
+     "name": "Villarreal",
+     "formation": "4-4-2",
+     "xi": [
+      {
+       "name": "Diego Conde",
+       "number": 13,
+       "grid": "1:1"
+      },
+      {
+       "name": "Pau Navarro",
+       "number": 26,
+       "grid": "2:4"
+      },
+      {
+       "name": "W. Kambwala",
+       "number": 5,
+       "grid": "2:3"
+      },
+      {
+       "name": "Logan Costa",
+       "number": 2,
+       "grid": "2:2"
+      },
+      {
+       "name": "Alfonso Pedraza",
+       "number": 24,
+       "grid": "2:1"
+      },
+      {
+       "name": "T. Buchanan",
+       "number": 9,
+       "grid": "3:4"
+      },
+      {
+       "name": "P. Gueye",
+       "number": 18,
+       "grid": "3:3"
+      },
+      {
+       "name": "Denis Suárez",
+       "number": 6,
+       "grid": "3:2"
+      },
+      {
+       "name": "Yeremy Pino",
+       "number": 21,
+       "grid": "3:1"
+      },
+      {
+       "name": "Álex Baena",
+       "number": 16,
+       "grid": "4:2"
+      },
+      {
+       "name": "T. Barry",
+       "number": 15,
+       "grid": "4:1"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
